@@ -1,0 +1,34 @@
+provider	badge	total_count	pct_of_provider
+openai_o3	Green	2097	71.28
+openai_gpt5	Green	1974	67.10
+atropos	Green	1473	50.07
+gemini	Green	1252	42.56
+claude	Green	827	28.11
+perplexity	Green	798	27.12
+llama_mav4	Green	414	14.07
+llama3_3	Green	365	12.41
+llama3_1	Green	316	10.74
+llama_scout4	Green	303	10.30
+System Publication	Green	271	9.60
+llama_mav4	Yellow	1821	61.90
+claude	Yellow	1697	57.68
+System Publication	Yellow	1360	48.19
+llama3_3	Yellow	1363	46.33
+llama_scout4	Yellow	1271	43.20
+gemini	Yellow	1092	37.12
+llama3_1	Yellow	1067	36.27
+perplexity	Yellow	973	33.07
+openai_gpt5	Yellow	870	29.57
+atropos	Yellow	658	22.37
+openai_o3	Yellow	471	16.01
+llama3_1	Red	1559	52.99
+llama_scout4	Red	1368	46.50
+System Publication	Red	1191	42.20
+llama3_3	Red	1214	41.26
+perplexity	Red	1171	39.80
+atropos	Red	811	27.57
+llama_mav4	Red	707	24.03
+gemini	Red	598	20.33
+claude	Red	418	14.21
+openai_o3	Red	374	12.71
+openai_gpt5	Red	98	3.33
