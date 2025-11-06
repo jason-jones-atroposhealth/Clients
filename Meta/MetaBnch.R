@@ -1,3 +1,5 @@
+# Generate visualization for Meta LLM benchmarks.
+
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
@@ -73,7 +75,7 @@ for(n in c("theme","axis")) {
    } else {
       tmp <- subset(tmp, theme!="")
    }
-   tmp$Bench <- with(tmp, paste0("Health Bench: ", ifelse(theme==".Overall","00", ifelse(n=="theme","01.","02.")), theme))
+   tmp$Bench <- with(tmp, paste0("HealthBench: ", ifelse(theme==".Overall","00", ifelse(n=="theme","01.","02.")), theme))
    tmp$theme <- NULL
    names(tmp) <- c("Model","Center","L95","U95","Bench")
    tmp$n <- NA
@@ -105,7 +107,7 @@ dfS <- dplyr::bind_rows(dfS, tmp[,c("Bench","Model","n","Center","L95","U95")])
 rm(tmp)
 
 # CPC.
-dfL$cpc <- data.table::fread(paste0(meta$ddr,"cpc_diagnosis_judgements.csv"))
+dfL$cpc <- data.table::fread(paste0(meta$ddr,"cpc_diagnosis_judgements-gemini25flashlite.csv"))
 dfL$cpc$candidate_id <- gsub("meta-llama/","",dfL$cpc$candidate_id)
 dfL$cpc$correct <- with(dfL$cpc, ifelse(is.na(correct_diagnosis_index), 0, 1))
 tmp <- data.table::data.table(aggregate(correct ~ candidate_id + case_id, data=dfL$cpc, FUN=mean))
@@ -127,14 +129,18 @@ data.frame(table(dfS$Model))
 tmp <- unique(dfS[,c("Model_Orig","Model")])
 tmp <- tmp[order(tmp$Model,tmp$Model_Orig),]
 rownames(tmp) <- NULL
-tmp
+meta$model_map <- tmp
+rm(tmp)
+print(meta$model_map)
 
 # Label best and worse within benchmarks.
 dfS <- dfS[order(dfS$Bench, -dfS$Center),]
+dfS$BestCenter <- NA
 dfS[,c("Best","Worse","BestMeta","Meta")] <- 0
 dfS$Meta[grep("llama",tolower(dfS$Model))] <- 1
 for(n in unique(dfS$Bench)) {
    tmp <- dfS[dfS$Bench==n,][1,c("Center","L95")]
+   dfS$BestCenter[dfS$Bench==n] <- tmp$Center
    dfS$Best[dfS$Bench==n & dfS$Center==tmp$Center] <- 1
    dfS$Worse[dfS$Bench==n & dfS$Center < tmp$L95] <- 1
    rm(tmp)
@@ -219,10 +225,12 @@ with(subset(tmp, is.na(Center)), rect(xleft=-10, xright=10, ybot=y-0.5, ytop=y+0
 with(subset(tmp, is.na(Center)), text(x=par("usr")[1], y=y, labels=Bench, pos=4, cex=0.8))
 with(subset(tmp, is.na(Center)), text(x=par("usr")[2], y=y, labels=Showing, pos=2, cex=0.6, col=gray(0.5)))
 for(i in 1:nrow(tmp)) {
+   if(one_model) with(tmp[i,], lines(x=c(Center,BestCenter), y=c(y,y), lty=3, col="lightblue"))
    with(tmp[i,], lines(x=c(L95,U95), y=c(y,y)))
    with(tmp[i,], lines(x=c(Center,MetaFab), y=c(y,y)))
 }
 rm(i)
+if(one_model) with(tmp, points(x=BestCenter, y=y, pch=24, bg="blue", col="blue", cex=0.5))
 with(tmp, points(x=Center, y=y, pch=20))
 with(tmp, points(x=MetaFab, y=y, pch=23, bg="gold", cex=1.5))
 with(subset(tmp, Best==1), points(x=Center, y=y, pch=24, bg="blue"))
@@ -236,10 +244,12 @@ if(one_model) {
 if(one_model) {
    legend("bottomright", box.col="white", bg="white", cex=0.7
          ,title="Compared to\nOthers In\nBenchmark"
-         ,legend=c("Best","Worse","No Diff")
-         ,pch=c(24,25,20)
-         ,pt.bg=c("blue","red","black")
-         ,lty=1)
+         ,legend=c("Best","Worse","No Diff","Best at Bench")
+         ,pch=c(24,25,20,24)
+         ,pt.bg=c("blue","red","black","blue")
+         ,col=c("black","black","black","blue")
+         ,pt.cex=c(1,1,1,0.5)
+         ,lty=c(1,1,1,3))
 }
 axis(1, cex.axis=0.8); box()
 
