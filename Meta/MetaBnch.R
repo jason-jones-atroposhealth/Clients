@@ -9,7 +9,7 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
             ,gen_pdf = TRUE
             ,sim_meta = FALSE
-            ,top_llama_only = TRUE)
+            ,top_llama_only = FALSE)
 
 # Function to get summary of benchmark using bootstrap.
 .fncBnchDist <- function(data, llm="llm", score="correct", bench="x", R=meta$R, seed=meta$seed) {
@@ -213,7 +213,7 @@ head(tmp,20)
 
 graphics.off()
 if(meta$gen_pdf) {
-   fnm <- paste0(meta$ddr,"BenchmarkBaseline",gsub(" ","_",ifelse(one_model,paste0("_",meta$include),"")),".pdf")
+   fnm <- paste0(meta$ddr,"BenchmarkBaseline",gsub(" ","_",ifelse(one_model,paste0("_",meta$include),ifelse(meta$top_llama_only,"_TopOnly",""))),".pdf")
    pdf(file=fnm, h=ifelse(one_model,4,12), w=6)
 }
 

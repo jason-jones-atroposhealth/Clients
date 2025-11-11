@@ -1,9 +1,14 @@
-# Workbench Source:  https://workbench.atroposhealth.biz/project/a0317f03-cb61-467f-a5ad-037a68ea36a8/edit/
+# Workbench Sources:
+# First run across data assets: https://workbench.atroposhealth.biz/project/a0317f03-cb61-467f-a5ad-037a68ea36a8/edit/
+# First run with using initial treatment start: https://workbench.atroposhealth.biz/case/479c2cd4-273e-4b2e-85f8-e730b98d4760/
 
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
-meta <- list(ddr = "~/Downloads/OtsukaSzBP1/"
-            ,years = 2015:2025)
+meta <- list(ddr   = "~/Downloads/OtsukaSzBP1/"
+            ,years = 2015:2025
+            ,strat = c("intervention","src")[2]
+            ,src   = c("all","Sz A Last")[1]
+            )
 
 fls <- list.files(meta$ddr,".*csv")
 
@@ -12,7 +17,7 @@ for(f in fls) {
    m <- tools::toTitleCase(gsub("_"," ",gsub("data_processed_|.csv","",f)))
    m <- gsub("Arcadia","A", gsub("Forian","F", gsub("Norstella","N", m)))
    tmp <- as.data.frame(data.table::fread(paste0(meta$ddr,f)))
-   tmp$Src <- m
+   tmp$src <- m
    dfA <- rbind(dfA, subset(tmp, index_year %in% meta$years))
    rm(tmp,m)
 }
@@ -28,6 +33,15 @@ names(dfA) <- gsub("baseline_baseline","baseline",names(dfA))
 names(dfA) <- gsub("followup\\.|\\.disorder|_cont|_bin","",names(dfA))
 names(dfA) <- gsub("blood\\.pressure","bp",names(dfA))
 names(dfA) <- gsub("baseline_comorb","baseline",names(dfA))
+
+# Clean up intervention.
+x <- ox <- unique(dfA$intervention)
+x <- gsub("INTERVENTION_","",x)
+x <- tools::toTitleCase(tolower(gsub("\\.|\\_"," ",x)))
+x <- gsub("Ref ","\\.",x)
+names(x) <- ox
+dfA$intervention <- x[dfA$intervention]
+rm(x,ox)
 
 # Fix ethnicity.
 dfA$ethnicity[-grep("HISPANIC",dfA$ethnicity)] <- "Unknown"
@@ -73,17 +87,28 @@ for(n in rev(sort(vls$pot[grep("charl|cci_",vls$pot)]))) {
    vls$pot <- .fncMov(vls$pot, itm=n, aft="index_year")
 }
 
-vls$t1 <- c(vls$tgt,vls$pot)
+if(tolower(meta$strat)=="src") {
+   vls$t1 <- c(vls$tgt,"intervention",vls$pot)
+} else if(tolower(meta$strat)=="intervention") {
+   vls$t1 <- c(vls$tgt,"src",vls$pot)
+}
+
 vls$t1 <- .fncMov(vls$t1, itm="years_followup_gt1", aft=tail(vls$t1[grep("outcome",vls$t1)],1))
 
 data.table::data.table(dfA[,vls$t1])
 
-fct <- vls$t1[which(sapply(dfA[,vls$t1], function(x) class(x)[1] %in% c("character","factor") | all(x %in% c(0,1,NA))))]
+if(any(tolower(meta$src)=="all")) {
+   tmp <- dfA
+} else {
+   tmp <- subset(dfA, tolower(src) %in% tolower(meta$src))
+}
+
+fct <- vls$t1[which(sapply(tmp[,vls$t1], function(x) class(x)[1] %in% c("character","factor") | all(x %in% c(0,1,NA))))]
 fct <- c(fct,"index_year")
 
-tb1 <- tableone::CreateTableOne(vars=vls$t1, factorVars=fct, strata="src", data=subset(dfA, src %in% c("Bp1 A","Sz A"))
+tb1 <- tableone::CreateTableOne(vars=vls$t1, factorVars=fct, strata=meta$strat, data=tmp
                                ,includeNA=TRUE, test=FALSE)
-rm(fct)
+rm(fct,tmp)
 
-print(tb1, missing=FALSE, smd=FALSE)
+print(tb1, missing=FALSE, smd=TRUE)
 
