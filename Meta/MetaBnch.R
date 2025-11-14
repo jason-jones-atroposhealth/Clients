@@ -7,9 +7,9 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,R = 1000
             ,exclude = c("atropos","System Publication")
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
-            ,gen_pdf = TRUE
+            ,gen_pdf = FALSE
             ,sim_meta = FALSE
-            ,top_llama_only = FALSE)
+            ,top_llama_only = TRUE)
 
 # Function to get summary of benchmark using bootstrap.
 .fncBnchDist <- function(data, llm="llm", score="correct", bench="x", R=meta$R, seed=meta$seed) {
