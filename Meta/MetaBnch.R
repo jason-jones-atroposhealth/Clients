@@ -74,7 +74,7 @@ dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$med_helm)[,c("Bench","Model","n",
    return(list(mean=mean(x), lcl=as.numeric(quantile(rst, probs=0.025)), ucl=as.numeric(quantile(rst, probs=0.975)), n=length(x), R=R, seed=seed))
 }
 
-tmp <- data.table::fread(paste0(meta$ddr,"healthbench_granular_data.tsv"))
+tmp <- data.table::fread(paste0(meta$ddr,"healthbench_granular_data.tsv.gz"))
 tmp <- merge(tmp, tmp[, .(run_id = min(run_id)), by=model])
 tmp$rubric_criterion_index <- NULL
 
