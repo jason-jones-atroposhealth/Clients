@@ -9,7 +9,7 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
             ,gen_pdf = FALSE
             ,sim_meta = FALSE
-            ,top_llama_only = TRUE)
+            ,top_llama_only = FALSE)
 
 # Function to get summary of benchmark using bootstrap.
 .fncBnchDist <- function(data, llm="llm", score="correct", bench="x", R=meta$R, seed=meta$seed) {
@@ -66,25 +66,60 @@ rm(f,fnm,tmp)
 dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$med_helm)[,c("Bench","Model","n","Center","L95","U95")])
 
 # HealthBench
-dfL$health_bench <- NULL
-for(n in c("theme","axis")) {
-   tmp <- data.table::fread(paste0(meta$ddr,"healthbench_",n,"_data.csv"))
-   tmp$V1 <- NULL
-   if(n=="theme") {
-      tmp$theme[tmp$theme==""] <- ".Overall"
-   } else {
-      tmp <- subset(tmp, theme!="")
-   }
-   tmp$Bench <- with(tmp, paste0("HealthBench: ", ifelse(theme==".Overall","00", ifelse(n=="theme","01.","02.")), theme))
-   tmp$theme <- NULL
-   names(tmp) <- c("Model","Center","L95","U95","Bench")
-   tmp$n <- NA
-   dfL$health_bench <- rbind(dfL$health_bench, tmp)
-   rm(tmp)
+.fncBootCI <- function(x, R=10^3, seed=meta$seed) {
+   set.seed(seed)
+   x <- na.omit(x)
+   rst <- rep(NA, R)
+   for(r in 1:length(rst)) rst[r] <- mean(sample(x, replace=TRUE))
+   return(list(mean=mean(x), lcl=as.numeric(quantile(rst, probs=0.025)), ucl=as.numeric(quantile(rst, probs=0.975)), n=length(x), R=R, seed=seed))
 }
-rm(n)
 
+tmp <- data.table::fread(paste0(meta$ddr,"healthbench_granular_data.tsv"))
+tmp <- merge(tmp, tmp[, .(run_id = min(run_id)), by=model])
+tmp$rubric_criterion_index <- NULL
+
+tmH <- NULL
+for(n in c(".","axis","theme")) {
+   tmp$grp <- ".Overall"
+   if(n != ".") tmp$grp <- paste(n,tmp[[n]],sep=":")
+   tmT <- tmp[, .(score=sum(points * criterion_met) / sum(ifelse(points > 0L, points, 0L))), by=c("model","run_id","grp","conversation_id")]
+   tmT$score[tmT$score %in% c(-Inf,NaN)] <- NA
+   tmS <- tmT[, as.list(.fncBootCI(x=score)), by=c("model", "run_id", "grp")]
+   tmH <- rbind(tmH, tmS)
+   rm(tmT,tmS)
+}
+rm(n,tmp)
+names(tmH) <- gsub("model","Model"
+                          ,gsub("mean","Center"
+                          ,gsub("lcl","L95"
+                          ,gsub("ucl","U95"
+                               ,names(tmH)))))
+tmH$Bench <- with(tmH, paste("HealthBench:",tools::toTitleCase(gsub(":",": ", gsub("_"," ",grp)))))
+tmH$Bench <- gsub(".overall",".Overall",tmH$Bench)
+dfL$health_bench <- tmH
+rm(tmH)
 dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$health_bench)[,c("Bench","Model","n","Center","L95","U95")])
+
+# HealthBench from summary data.
+#dfL$health_bench <- NULL
+#for(n in c("theme","axis")) {
+#   tmp <- data.table::fread(paste0(meta$ddr,"healthbench_",n,"_data.csv"))
+#   tmp$V1 <- NULL
+#   if(n=="theme") {
+#      tmp$theme[tmp$theme==""] <- ".Overall"
+#   } else {
+#      tmp <- subset(tmp, theme!="")
+#   }
+#   tmp$Bench <- with(tmp, paste0("HealthBench: ", ifelse(theme==".Overall","00", ifelse(n=="theme","01.","02.")), theme))
+#   tmp$theme <- NULL
+#   names(tmp) <- c("Model","Center","L95","U95","Bench")
+#   tmp$n <- NA
+#   dfL$health_bench <- rbind(dfL$health_bench, tmp)
+#   rm(tmp)
+#}
+#rm(n)
+#
+#dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$health_bench)[,c("Bench","Model","n","Center","L95","U95")])
 
 # Answered with Evidence.
 dfL$awe <- data.table::fread(paste0(meta$ddr,"answered_with_evidence_summary.tsv"))
