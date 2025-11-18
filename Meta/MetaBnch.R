@@ -7,9 +7,10 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,R = 1000
             ,exclude = c("atropos","System Publication")
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
-            ,gen_pdf = FALSE
-            ,sim_meta = FALSE
-            ,top_llama_only = FALSE)
+            ,gen_pdf = c(TRUE,FALSE)[2]
+            ,sim_meta = c(TRUE,FALSE)[2]
+            ,top_llama_only = c(TRUE,FALSE)[2]
+            )
 
 # Function to get summary of benchmark using bootstrap.
 .fncBnchDist <- function(data, llm="llm", score="correct", bench="x", R=meta$R, seed=meta$seed) {
@@ -57,13 +58,14 @@ for(f in fnm) {
                                ,n=1000
                                ,Center=val
                                ,L95=ci[1], U95=ci[2]
+                               ,limits_not_ci=1
                                ))
    rm(jsn,val,x,b,ci)
 }
 dfL$med_helm <- tmp
 rm(f,fnm,tmp)
 
-dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$med_helm)[,c("Bench","Model","n","Center","L95","U95")])
+dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$med_helm)[,c("Bench","Model","n","Center","L95","U95","limits_not_ci")])
 
 # HealthBench
 .fncBootCI <- function(x, R=10^3, seed=meta$seed) {
@@ -183,7 +185,9 @@ for(n in unique(dfS$Bench)) {
 }
 rm(n)
 
-print(dfS, row.names=FALSE)
+dfS$limits_not_ci[is.na(dfS$limits_not_ci)] <- 0
+
+#print(dfS, row.names=FALSE)
 
 # Plotting
 tmp <- dfS[order(dfS$Bench, -dfS$Center),]
@@ -261,7 +265,7 @@ with(subset(tmp, is.na(Center)), text(x=par("usr")[1], y=y, labels=Bench, pos=4,
 with(subset(tmp, is.na(Center)), text(x=par("usr")[2], y=y, labels=Showing, pos=2, cex=0.6, col=gray(0.5)))
 for(i in 1:nrow(tmp)) {
    if(one_model) with(tmp[i,], lines(x=c(Center,BestCenter), y=c(y,y), lty=3, col="lightblue"))
-   with(tmp[i,], lines(x=c(L95,U95), y=c(y,y)))
+   with(tmp[i,], lines(x=c(L95,U95), y=c(y,y), col=ifelse(limits_not_ci,"gray","black")))
    with(tmp[i,], lines(x=c(Center,MetaFab), y=c(y,y)))
 }
 rm(i)
