@@ -115,6 +115,7 @@ tb1 <- print(tb1, missing=TRUE, smd=TRUE)
 clip <- pipe("pbcopy", "w")                       
 write.table(tb1, file=clip, quote=FALSE, sep="\t", na="")                               
 close(clip)
+rm(clip)
 
 3 * "a"
 
@@ -142,6 +143,7 @@ data.table::data.table(dfD)
 print(dfD, row.names=FALSE)
 
 clip <- pipe("pbcopy", "w")                       
-write.table(dfD, file=clip, quote=FALSE, sep="\t", na="")                               
+write.table(dfD, file=clip, quote=FALSE, sep="\t", na="", row.names=FALSE)                               
 close(clip)
+rm(clip)
 
