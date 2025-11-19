@@ -46,19 +46,21 @@ for(f in fnm) {
    x <- unlist(strsplit(f,"/"))
    b <- sub("\\:.*","",x[length(x)-1])
    ci <- rep(NA,2)
+   limits_not_ci <- 0
    if(b %in% c("medhallu","pubmed_qa")) {
       ci <- as.numeric(binom.test(x=round(val*1000), n=1000)$conf.int)
    } else {
       b <- paste(b,"(rescale, max=5)")
       val <- val / 5
       ci <- val + c(-0.025, 0.025)
+      limits_not_ci <- 1
    }
    tmp <- rbind(tmp, data.frame(Bench=paste("MedHELM:",b)
                                ,Model=sub(".*\\_","",sub(".*\\:","",x[length(x)-1]))
                                ,n=1000
                                ,Center=val
                                ,L95=ci[1], U95=ci[2]
-                               ,limits_not_ci=1
+                               ,limits_not_ci=limits_not_ci
                                ))
    rm(jsn,val,x,b,ci)
 }
