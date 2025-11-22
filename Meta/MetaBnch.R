@@ -11,7 +11,8 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,gen_pdf = c(TRUE,FALSE)[2]
             ,sim_meta = c(TRUE,FALSE)[2]
             ,top_llama_only = c(TRUE,FALSE)[1]
-            ,improve = c("-rag","-prompt")
+            ,improve = c("-rag","-prompt")                                       #Improvements in time order.
+            ,show_improvement = c("Regular","All","Better","Worse")[1]
             )
 
 # Function to get summary of benchmark using bootstrap.
@@ -185,6 +186,24 @@ for(n in unique(dfS$Bench)) {
 rm(n)
 
 dfS$limits_not_ci[is.na(dfS$limits_not_ci)] <- 0
+dfS$Improve <- trimws(dfS$Improve)
+
+# Improvement calculations.
+tmI <- subset(dfS, Improve!="")[,c("Bench","Model","Center","Improve")]
+tmI$Base <- NA
+for(i in 1:nrow(tmI)) tmI$Base[i] <- gsub(tmI$Improve[i], "", tmI$Model[i])
+
+tmB <- subset(dfS, Model %in% tmI$Base)[,c("Bench","Model","L95","U95")]
+names(tmB)[which(names(tmB)=="Model")] <- "Base"
+names(tmB) <- gsub("95","95_Base",names(tmB))
+
+tmI <- merge(tmI, tmB)
+tmI$Progress <- with(tmI, ifelse(Center > U95_Base,"Better", ifelse(Center < L95_Base, "Worse", "Same")))
+
+tmI$Improve_Label <- abbreviate(tools::toTitleCase(trimws(gsub("-"," ",tmI$Improve))),1)
+tmI$Improve <- tmI$Center <- NULL
+
+dfS <- merge(dfS, tmI, all.x=TRUE)
 
 #print(dfS, row.names=FALSE)
 
@@ -192,6 +211,10 @@ dfS$limits_not_ci[is.na(dfS$limits_not_ci)] <- 0
 tmp <- dfS[order(dfS$Bench, -dfS$Center),]
 tmp <- subset(tmp, !(tolower(Model) %in% tolower(meta$exclude)))
 if(any(!is.na(meta$bench))) tmp <- tmp[grep(paste(meta$bench,collapse="|"),tmp$Bench),]
+tm2 <- NULL
+if(meta$show_improvement!="Regular") {
+   tmp <- subset(tmp, Improve=="")
+}
 
 all_models <- sort(unique(tmp$Model))
 
