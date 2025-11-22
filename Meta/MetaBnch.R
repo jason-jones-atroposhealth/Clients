@@ -7,9 +7,11 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,R = 1000
             ,exclude = c("atropos","System Publication")
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
+            ,bench = c(NA,"HealthBench")[1]
             ,gen_pdf = c(TRUE,FALSE)[2]
             ,sim_meta = c(TRUE,FALSE)[2]
-            ,top_llama_only = c(TRUE,FALSE)[2]
+            ,top_llama_only = c(TRUE,FALSE)[1]
+            ,improve = c("-rag","-prompt")
             )
 
 # Function to get summary of benchmark using bootstrap.
@@ -64,6 +66,7 @@ for(f in fnm) {
                                ))
    rm(jsn,val,x,b,ci)
 }
+tmp$Model <- gsub("databricks-","",tmp$Model)
 dfL$med_helm <- tmp
 rm(f,fnm,tmp)
 
@@ -78,9 +81,17 @@ dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$med_helm)[,c("Bench","Model","n",
    return(list(mean=mean(x), lcl=as.numeric(quantile(rst, probs=0.025)), ucl=as.numeric(quantile(rst, probs=0.975)), n=length(x), R=R, seed=seed))
 }
 
-tmp <- data.table::fread(paste0(meta$ddr,"healthbench_granular_data.tsv.gz"))
-tmp <- merge(tmp, tmp[, .(run_id = min(run_id)), by=model])
+fnm <- tail(list.files(meta$ddr, "healthbench"),1)
+tmp <- NULL
+for(f in fnm) {
+   tmp <- rbind(tmp, cbind(data.table::fread(paste0(meta$ddr,f)), data.frame(v=f)))
+}
+rm(fnm,f)
+tmp$model <- gsub("-enhanced-prompt","-prompt", tmp$model)
+tmp <- merge(tmp, tmp[, .(run_id = max(run_id)), by=model])
 tmp$rubric_criterion_index <- NULL
+tmp$v <- as.numeric(as.factor(tmp$v))-1
+tmp$v <- NULL
 
 tmH <- NULL
 for(n in c(".","axis","theme")) {
@@ -103,27 +114,6 @@ tmH$Bench <- gsub(".overall",".Overall",tmH$Bench)
 dfL$health_bench <- tmH
 rm(tmH)
 dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$health_bench)[,c("Bench","Model","n","Center","L95","U95")])
-
-# HealthBench from summary data.
-#dfL$health_bench <- NULL
-#for(n in c("theme","axis")) {
-#   tmp <- data.table::fread(paste0(meta$ddr,"healthbench_",n,"_data.csv"))
-#   tmp$V1 <- NULL
-#   if(n=="theme") {
-#      tmp$theme[tmp$theme==""] <- ".Overall"
-#   } else {
-#      tmp <- subset(tmp, theme!="")
-#   }
-#   tmp$Bench <- with(tmp, paste0("HealthBench: ", ifelse(theme==".Overall","00", ifelse(n=="theme","01.","02.")), theme))
-#   tmp$theme <- NULL
-#   names(tmp) <- c("Model","Center","L95","U95","Bench")
-#   tmp$n <- NA
-#   dfL$health_bench <- rbind(dfL$health_bench, tmp)
-#   rm(tmp)
-#}
-#rm(n)
-#
-#dfS <- dplyr::bind_rows(dfS, as.data.frame(dfL$health_bench)[,c("Bench","Model","n","Center","L95","U95")])
 
 # Answered with Evidence.
 dfL$awe <- data.table::fread(paste0(meta$ddr,"answered_with_evidence_summary.tsv"))
@@ -156,6 +146,12 @@ rm(tmp)
 
 dfS <- dplyr::bind_rows(dfS, .fncBnchDist(data=as.data.frame(dfL$cpc), bench="CPC"))
 
+dfS$Improve <- ""
+for(i in meta$improve) {
+   dfS$Improve[grep(i,dfS$Model)] <- paste(i, dfS$Improve[grep(i,dfS$Model)])
+}
+rm(i)
+   
 # Rename models for consistency.
 dfS$Model_Orig <- dfS$Model
 dfS$Model[grep("llama3_1|llama-3.1-8b",dfS$Model)] <- "Llama 3.1 8b"
@@ -164,6 +160,7 @@ dfS$Model[grep("llama_mav4|llama-4-maverick",dfS$Model)] <- "Llama 4 Maverick"
 dfS$Model[grep("llama_scout4|llama-4-scout",dfS$Model)] <- "Llama 4 Scout"
 dfS$Model[grep("o3",dfS$Model)] <- "o3"
 dfS$Model[grep("gpt5",dfS$Model)] <- "gpt5"
+dfS$Model <- trimws(with(dfS, paste0(Model,Improve)))
 data.frame(table(dfS$Model))
 tmp <- unique(dfS[,c("Model_Orig","Model")])
 tmp <- tmp[order(tmp$Model,tmp$Model_Orig),]
@@ -194,6 +191,7 @@ dfS$limits_not_ci[is.na(dfS$limits_not_ci)] <- 0
 # Plotting
 tmp <- dfS[order(dfS$Bench, -dfS$Center),]
 tmp <- subset(tmp, !(tolower(Model) %in% tolower(meta$exclude)))
+if(any(!is.na(meta$bench))) tmp <- tmp[grep(paste(meta$bench,collapse="|"),tmp$Bench),]
 
 all_models <- sort(unique(tmp$Model))
 
@@ -273,6 +271,7 @@ for(i in 1:nrow(tmp)) {
 rm(i)
 if(one_model) with(tmp, points(x=BestCenter, y=y, pch=24, bg="blue", col="blue", cex=0.5))
 with(tmp, points(x=Center, y=y, pch=20))
+with(subset(tmp, Improve!=""), points(x=Center, y=y, pch=1, cex=2))
 with(tmp, points(x=MetaFab, y=y, pch=23, bg="gold", cex=1.5))
 with(subset(tmp, Best==1), points(x=Center, y=y, pch=24, bg="blue"))
 with(subset(tmp, Worse==1), points(x=Center, y=y, pch=25, bg="red"))

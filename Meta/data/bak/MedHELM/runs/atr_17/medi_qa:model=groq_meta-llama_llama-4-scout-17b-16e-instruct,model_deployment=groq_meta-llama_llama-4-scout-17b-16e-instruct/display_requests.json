@@ -1,0 +1,2852 @@
+[
+  {
+    "instance_id": "1",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: abetalipoproteimemia hi, I would like to know if there is any support for those suffering with abetalipoproteinemia? I am not diagnosed but have had many test that indicate I am suffering with this, keen to learn how to get it diagnosed and how to manage, many thanks\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "2",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: about thalassemia treatment sir,my friend is suffering from thalassemia ,in that majorly red blood anemia,white blood anemia and the blood is comming out from mouth when she got cough .her condition is very severe .in her body the red ,white blood cells are abscent .so that blood transfusion is doing for every 16-20days.then in the recent days the blood also comming out from mouth please tell me where can i get the treatment for this disease .we can travel around the world for treatment please reply me as soon as possible. thank you sir.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "3",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Absence seizures Does any damage occurre from these spells. Mental or physical\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "5",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: adrenoleukodystrophy A child I have been asked to work with has been diagnosed with this condition.I am so far unable to find info pertaining to this illness. Can you help??\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "6",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Anal Fissure I may have a couple anal fissures and looking to speak with someone to get some information and support.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "7",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Angelman syndrome. Can a person with Angelman Syndrome have children? If so, can the disorder be passed on to offspring?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "8",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Asking about Hairy cell leukemia I get report for my father from hospital it is saying that he have Hairy cell leukemia i am here to ask if this dissease dangerous and there is treatment for it Also if The one who have it will live for long or not ? My father age is 55 We discover the dissease by blood test\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "10",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: asthma Question. What is the consensus of medical doctors as to whether asthma can be cured? And do you have an article discussing whether asthma can be cured?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "12",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Bad Breath I have very bad breath and at times it can make myself and others sick. I need some advice as to what I need to do.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "13",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Bipolar and Generalized Anxiety Disorder I read about TMS Therapy. Do you know anything about it? Has it had success? Also wondering about ECT? Finally, I've been told acupuncture can help for mood disorders. Is that true for mixed bipolar and generalized anxiety disorder along with meds? Have you ever heard of this?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "14",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Breast cancer at 84. My mother was just diagnost with breast cancer. She is 84 years old, her tumor started in the milk duct and is small in size, their is a mass as well in the same breast. He is scheduled for a lumpectomy to remove both. Because of age we would like suggestions on treatment options after surgery.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "15",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Causes of Peripheral Neuropathy What information does the National Library of Medicine have that states causes of peripheral neuropathy?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "16",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: CURE FOR PNEUMONIA Dear DR, please i have a friend that has the above illness..I want to find out...since i want to marry her...is it an infectious illness,,and can it be totally cured. And how can i help her to get this cured..Please i really need your reply urgently\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "17",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Cushing, fybromyaglia, Chronic fatigue my main concern is no treatment and the musclar distrophy effecting my heart, legs feet, shoulders, arms, etc.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "18",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Cervical Cancer Can a long term untreated bladder infection aid in the cause of cervical cancer? And can the fact that my mom has cervical cancer aid in my chance of getting cervical cancer?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "19",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Diabetes Type 2 I test before going to bed and the reading is 94 but when I test again in the morning, the reading is 165. How can I lower it? I eat dinner around 8PM and nothing until the next morning.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "21",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: My cousin she is leber amaurosis she need help I don't know where to start from\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "22",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Stiff person Syndrome. Please can you tell me what are the early symptoms I have severe cramps in my feet which are twisting into an arc,muscle spasms slowly getting worse and my muscles particularly in my legs are cramping like someone has pushed a knitting needle into them. Started off at night but now happening through the day my back and neck and voice box are also effected and my chest area has now seized to the point of restricting my breathing to very shallow at times I find that I am stretching out involuntarily right through my body and this is becoming more frequent\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "23",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Please help me with my brother with locked-in syndrome in for 3 years.Somebody please help. God bless .\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "24",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: congenital diaphragmatic hernia I need to know if CDH can be passed down to future generations. I just learned that this condition most likely caused the death of my first child back in 1971. I was then told it was merely a fluke. I had NO trauma during the full-term pregnancy, and I and my then husband were in very good health. Now my son (from a different husband) and his wife are due to have fraternal twins in 2015. Does the term 'congenital' mean that it could be passed down to another generation? I do not want to alarm my son and his wife. I just would like to inform whatever pediatrician is caring for these babies as to my experience. Unfortunately my son and I are estranged. And I do not know who is their pediatrician. My child's CDH was very severe. I know there are far less severe cases that can go undetected &/or undiagnosed unless there is a reason to suspect such a condition. Please respond to my concerns.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "25",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Colon cancer cure seen on tv. My father has colon cancer and said he saw a commercial on tv about a cure for colon cancer. He cannot remember any details about it. I was wondering if you know anything about something like this. Please let me know. Thank you,\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "27",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: diarrhea i had bad diarrhea over the weekend and though how my mother used paregoric, went to the drug store to get some, he said they dont sell it any more HELP\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "28",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Duchenne Muscular Dystrophy. I am doing a research project on this genetic disease and I would like to know more about it from a professional. I am researching the mode of inheritance, symptoms, treatments/ support groups, and relative cost to family.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "29",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I am looking for information about Cancer of the Esophagus and I'm not finding anything on your website.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "30",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I have an hernia I would love to take care off it ASAP I was wondering if you guys could help me . Thanks\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "31",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: My father is suffering from IBS and is loosing weight day by day.sometimes he even faints due to weakness.He cannot digest food .please help us and suggest us upon this problem.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "32",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: We have 14 siblings in our family , at least 10 of us has had a frozen shoulder. We are wondering why? should we be concerned?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "33",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I am a current Gastroparesis fighter with a GJ feeding tube. I am also one of the admins for a GP support group and an advocacy group. I have become a volunteer advocater. I would appreciate any info you can share about Gastroparesis, Feeding tubes, and even TPN. Thanks\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "36",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I'm a 72 year old female, and have diverticulosis,gastritis, and esophagitis. I tried to see three different doctors today, but all were booked. I honestly don't know what to do. It hurts in my chest, and I can hardly talk.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "38",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Can you mail me patient information about Glaucoma, I was recently diagnosed and want to learn all I can about the disease.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "39",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Hair loss Information Required Can you provide something to help grow my hair back? I need my hair back as im the spitting double of Dr evil with no hair.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "40",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Hello, I have a scoliosis problem plz help me I want its treatment I can send my x.ray also\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "41",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: help with obesity I would like help on my obesity problem and if I can get help\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "42",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: hi my name is I'm currently working with and I was wondering I came across some of you healthy tip fliers for HIV/Aids treatment .at the moment we have a study going on that helps HIV positive transgender women into HIV quality care .so it would be great to have some more information on HIV/Aids treatment\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "43",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: How bad can endometriosis get?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "45",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I am 23yr boy,i have knock knees i want treatment. Please help me.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "46",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I have a fractured nose i need it fixed. its been broke for 3 years now\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "47",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I have been battling Anal fissure for close to two years now and it has refused to heal all these while. Please what do you suggest i do? Thanks\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "49",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I have no help its about 4 years now I have ingrown toenail i have a problem of ingrown toenail its about 4 years now I have this problem i need help\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "54",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I am suffering from Kartagener's syndrome and wanted information from you or from Dr. . for this syndrome. (About fertility) and if possible other symptoms. Thank you.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "55",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: know more about My Daughter have Distal renal tubular acidosis. we are from Mexico, and we ae woundering if can send to us more infomation. maybe you can reccommend to us a association???? i don?t know\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "56",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I have been researching Lewy Body Disease and have a few questions.1) Is this disease hereditary2) Does alcoholism play a role in the beginning process of this disease3) What are the initial symptoms of the diseaseAny information you could forward would be greatly appreciated.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "57",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: I have a list of questions about Tay sachs disease and clubfoot 1. what is TSD/Clubfoot, and how does it effect a baby 2. what causes both? can it be prevented, treated, or cured 3. How common is TSD? how common is Clubfoot 4. How can your &quot;agency&quot; help a women/couple who are concerned about this congenital condition, and is there a cost? If you can answer these few questions I would be thankful, please get back as soon as you can.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "58",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: My daughter has menkes syndrome and would like to know how to go about. Thx\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "59",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Please let me know where I can get literature on Cardiac amyloidosis. My uncle died yesterday from this disorder. Since this is such a rare disorder, and to honor his memory, I would like to distribute literature at his funeral service.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "60",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: milroy disease hello , my daughter has lymph edema her both legs and left hand is swelling , this problem started when she was of 3 months now she is 16 months , her swelling is growing day by day , im clue less what to do and what kind of treatment i should do plz help and suggest us\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "61",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: more information in relation to Ellis van creveld syndrome Specifically in later life can they have children has it ever been reported any researchcarried out and just as much information as possible to help my understanding of what I have Many thanks\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "62",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: What is Nephrotic Syndrome. What are its causes and cures?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "64",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: When and how do you know when you have congenital night blindness?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "66",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: If oleandor was ingested by touching the plant stems inner part and then directly eating without washing hands, how long would u exspect symptoms would start? And how severe would you say symptoms may get.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "67",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Is optic atrophy ginetic and what cause it?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "68",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Are there any researches indicating how early an individual may experience any signs or symptoms of Rheumatoid Arthritis?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "70",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Polycystic ovarian syndrome Is it possible for parents to pass this on in the genes to their children - is there any other way this can be acquired?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "71",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: polymicrogyria. My 16 month old son has this. Does not sit up our crawl yet but still trying and is improving in grabbing things etc etc. Have read about other cases that seem 10000 time worse. It's it possible for this post of his brain to grown to normal and he grow out of it?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "72",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: prevention of preeclampsia I know that the jury is out on the exact causes of preeclampsia, but I am looking for some of the ways that the chances of acquiring it can be minimized.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "73",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Project. Hi my name is and I'm doing a school project about leukemia and I was wondering if you can anwser some of my questions please.1. What cause leukemia cancer?2. Can you survive leukemia?3. How does leukemia affect your body?4. Is leukemia inherited?5. What is advanced leukemia?6. How long can someone with leukemia expect to live?7. Can you tell if you have leukemia?8. What treatments do you need to take?9. What are the signs of leukemia?10. What is the difference between AML and CML ?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "74",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Psoriasis for past 7-8 years I had psoriasis on my scalp for nearly 10 years. Please give suggestions and medications.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "75",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Research assignment Hi, I am a grade 12 student who is doing a research assignment on neurological disorders. Do you believe that there will ever be a bonafide cure for Multiple Sclerosis? If so, what kind of time frame would put on this cure?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "76",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: prostate cancer using seeds aimed at maligmem tumors is this a safe decision\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "78",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Rubella My grandson (4 yrs old) has contracted Rubella. I know for sure he has had at least one of the vaccines. They are living in Mexico right now. Should we be worried?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "79",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Is it necessary to go to the dr. when getting a skull fracture?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "81",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: spina bifida; vertbral fusion;syrinx tethered cord. can u help for treatment of these problem\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "82",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Stem Cell Therapy for Muccular Dystrophy I have read the Medline Abstracts 98,99 of 'Limb-girdle muscular dystrophy'. Please could you tell me how I contact a specialist to enquire further with this...Thank you...\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "84",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Subcutaneous retrocalcaneal bursitis Haglund's deformity of the calcaneum. I have this problem. Can you please help to overcome this?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "85",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: subjective vertigo Can macular degeneration in only one eye cause dizziness?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "86",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: symptoms of dehydration When a person is very dehydrated do they sometimes get a tight pain in their chest (right below the breasts) right before they faint/pass out?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "90",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Treatment for optic nerve atrophy. Hello Name's case : Sex : Male Date of Birth : 1964 Nationality : X Diagnosis : optic nerve atrophy . i am suffering from optic atrophy, which led to loss of vision and inability to see, I suffer from this case from 1998 saluting suffered a fall on the head, which led to began this case even lost look, and have been performed process surgery in in 1998-1999 . And then in 2009 cured by reactive optic nerve by Russian Professor . i want know you hospital have treatment for optic nerve atrophy , and what this treatment i need more information about treatment of optic nerve because now 16 years old I can not vision, and I wish could belive hope for treatment of my case. And i want know the cost of treatment . Thank you Regards /\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "91",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: treatment options versus migraine types Migraine seems to be a spectrum of conditions rather than only one easily diagnosed affliction. Many innovative migraine treatments are now in use, but it seems that each treatment only addresses a narrow set of conditions; for example, my daughter has tried many different treatment options (QEEG, HEG, TMS, topamax, ...) without success. Has any research been done to characterize which treatment types are effective against which migraine types?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "92",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: typhoid fever Hi, My name is from X i have suffering from typhoid please give me solution i have one question i had got treatment from one year but i am not well now give me solution?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "93",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: varicella shingles How can I determine whether or not I've had chicken pox. If there is a test for it, what are the results of the tests I need to know that will tell me whether or not I have had chicken pox? I want to know this to determine if I should have shingles vaccine (Zostavax) Thank you.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "95",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Vitelliform Macular Dystrophy Would like to obtain more info on possible treatments.\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "97",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: williams sydrome conditon. i need to send me more information about Williams Syndrome and some tips how to educate people with this disorder.I hope having news from you soon!!thank you\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "98",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: Would appreciate any good info on Lewy Body Dementia, we need to get people aware of this dreadful disease, all they talk about is alzheimers. Thank you\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "99",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: would you help me to fine article or jurnal about Cri du chat syndrome\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "101",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how common is cystic fibrosis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "103",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how common is fragile x syndrome\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "105",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do i prevent myself from having dementia\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "106",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do i stop using rasagiline\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "107",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do people get diabetes\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "108",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do we treat the burns caused by radiation?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "109",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you administer lanreotide\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "110",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you catch hepatitis c\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "111",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you check for lupus?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "112",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you diagnose anxiety\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "113",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you get a prolapse bladder\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "115",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you get neuromuscular disorders\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "116",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you get pulmonary hypertension\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "117",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how do you test for cholesterol level in your body\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "118",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is a heart attack treated\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "119",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is asthma diagnosed\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "121",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is edward's syndrome diagnosed\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "122",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is generalized anxiety disorder diagnosed\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "123",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is gonorrhea diagnosed\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "124",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is hemophilia treated\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "127",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is congenital heart disease passed down\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "129",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is edward's syndrome diagnosed\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "130",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is epidural harmful\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "131",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how is epilepsy diagnosed\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "132",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how much ibuprofen is too much\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "133",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how much oxazepam could cause an overdose?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "134",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how nicotine effects the brain\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "135",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how often do you need a pap smear\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "137",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how smoking tobacco affects the brain\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "138",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how smoking tobacco affects the rest of the body\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "139",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to deal with anxiety\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "140",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to loose weight\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "142",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to manage prostate cancer\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "143",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to prevent atherosclerosis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "144",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to prevent conjunctivitis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "145",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to prevent diabetes\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "147",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to prevent lung cancer\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "148",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to prevent schizophrenia\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "150",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: how to treat a heart attack\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "152",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are autoimmune blood disorders\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "153",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are known causes of bipolar disorder\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "154",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are pancreatic enzymes?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "155",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are some common symptoms of bulimia\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "156",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are some of the treatments available to males with klinefelter's\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "157",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are symptoms of a nonfunctioning gallbladder\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "158",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the causes of childhood obesity\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "159",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the causes of pulmonary hypertension\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "160",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the main causes tooth loss?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "161",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the risk factors of type ii diabetes\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "162",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the symptoms for cystic fibrosis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "163",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the symptoms for prostate cancer\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "165",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the causes of headaches\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "166",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what are the causes of pulmonary hypertension\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "167",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what blood tests confirm celiac disease\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "168",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what can cause hypoglycemia\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "169",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what causes bipolar disorder\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "170",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what causes fungal pneumonia\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "171",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what does kidney disease look like\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "174",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is acute diverticulitis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "176",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is binge eating disorder\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "177",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is copd\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "179",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is epilepsy\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "180",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is the cause of congenital heart defects\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "181",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is the cause of ocd\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "182",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is the cause of the coffin lowry syndrome?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "183",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is the disorder achondroplasia\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "184",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what is the treatment for lymphoma\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "185",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what medications are prescribed for brucellosis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "186",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what test do you do for rheumatoid \"arthritis?\"\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "187",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what the treatment for bronchitis\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "188",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: what treatment do you use to cure chickenpox\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "189",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: who is at higher risk for calcium overdose?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "190",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: who is at risk for contracting dengue fever? is there a certain age group or race that contracts dengue fever?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "191",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: why can you not take grapefruit with felodipine\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "193",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: can i take keflex to cure staph?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  },
+  {
+    "instance_id": "195",
+    "train_trial_index": 0,
+    "request": {
+      "model_deployment": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+      "embedding": false,
+      "prompt": "Answer the following consumer health question.\n\nQuestion: could tetanus be a cause of death?\nAnswer:",
+      "temperature": 0.0,
+      "num_completions": 1,
+      "top_k_per_token": 1,
+      "max_tokens": 1024,
+      "stop_sequences": [],
+      "echo_prompt": false,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0
+    }
+  }
+]
