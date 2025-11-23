@@ -12,7 +12,7 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,sim_meta = c(TRUE,FALSE)[2]
             ,top_llama_only = c(TRUE,FALSE)[1]
             ,improve = c("-rag","-prompt")                                       #Improvements in time order.
-            ,show_improvement = c("Regular","All","Better","Worse")[1]
+            ,show_improvement = c("Regular","All","Better","Worse")[2]
             )
 
 # Function to get summary of benchmark using bootstrap.
@@ -204,6 +204,7 @@ tmI$Improve_Label <- abbreviate(tools::toTitleCase(trimws(gsub("-"," ",tmI$Impro
 tmI$Improve <- tmI$Center <- NULL
 
 dfS <- merge(dfS, tmI, all.x=TRUE)
+rm(tmI,tmB)
 
 #print(dfS, row.names=FALSE)
 
@@ -211,10 +212,7 @@ dfS <- merge(dfS, tmI, all.x=TRUE)
 tmp <- dfS[order(dfS$Bench, -dfS$Center),]
 tmp <- subset(tmp, !(tolower(Model) %in% tolower(meta$exclude)))
 if(any(!is.na(meta$bench))) tmp <- tmp[grep(paste(meta$bench,collapse="|"),tmp$Bench),]
-tm2 <- NULL
-if(meta$show_improvement!="Regular") {
-   tmp <- subset(tmp, Improve=="")
-}
+if(meta$show_improvement!="Regular") tmp <- subset(tmp, Improve=="" | Best==1 | BestMeta==1)
 
 all_models <- sort(unique(tmp$Model))
 
@@ -271,7 +269,6 @@ if(one_model) {
    tmp <- tmp[order(-tmp$y),]
    tmp$y <- rev(tmp$y)
 }
-head(tmp,20)
 
 graphics.off()
 if(meta$gen_pdf) {
@@ -304,6 +301,27 @@ if(one_model) {
    with(tmp, mtext(Model, side=2, line=0.5, at=y, las=1, cex=0.6, font=ifelse(Best==1,2,ifelse(BestMeta==1,3,1))))
 }
 
+# Show improvement.
+tmI <- NULL
+if(meta$show_improvement!="Regular") {
+   # Data prep for plotting.
+   if(meta$show_improvement=="All") {
+      tmI <- subset(dfS, !is.na(Progress))
+   } else if(meta$show_improvement %in% c("Better","Worse")) {
+      tmI <- subset(dfS, Progress %in% meta$show_improvement)
+   }
+   tmI <- tmI[,c("Bench","Base","Center","Progress","Improve_Label")]
+   names(tmI)[which(names(tmI)=="Base")] <- "Model"
+   tmI <- merge(tmp[,c("Bench","Model","y")], tmI)
+
+   # Plotting.
+   with(tmI, text(x=Center, y=y, labels=Improve_Label, cex=0.6, col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
+}
+
+if(!is.null(tmI)) {
+   
+}
+
 if(one_model) {
    legend("bottomright", box.col="white", bg="white", cex=0.7
          ,title="Compared to\nOthers In\nBenchmark"
@@ -324,4 +342,4 @@ if(meta$gen_pdf) {
 }
 
 all_models
-rm(all_models,tmp,one_model)
+rm(all_models,tmp,tmI,one_model,limits_not_ci)
