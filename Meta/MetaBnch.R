@@ -201,6 +201,7 @@ tmI <- merge(tmI, tmB)
 tmI$Progress <- with(tmI, ifelse(Center > U95_Base,"Better", ifelse(Center < L95_Base, "Worse", "Same")))
 
 tmI$Improve_Label <- abbreviate(tools::toTitleCase(trimws(gsub("-"," ",tmI$Improve))),1)
+tmLeg <- unique(tmI[,c("Improve","Improve_Label")])
 tmI$Improve <- tmI$Center <- NULL
 
 dfS <- merge(dfS, tmI, all.x=TRUE)
@@ -276,6 +277,7 @@ if(meta$gen_pdf) {
    pdf(file=fnm, h=ifelse(one_model,4,12), w=6)
 }
 
+layout(matrix(c(1,2)), heights=c(10,1))
 par(mar=c(2,ifelse(one_model,16,8),1,0.5), cex=0.8)
 plot(x=c(0,1), y=range(tmp$y)+c(-1,1), type="n", ann=FALSE, axes=FALSE, yaxs="i")
 if(!one_model) with(subset(tmp, BestMeta==1), rect(xleft=-10, xright=10, ybot=y-0.5, ytop=y+0.5, border=NA, col="khaki1"))
@@ -319,22 +321,24 @@ if(meta$show_improvement!="Regular") {
                  ,font=ifelse(Progress=="Same",1,2)
                  ,col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
 }
-
-if(!is.null(tmI)) {
-   
-}
-
-if(one_model) {
-   legend("bottomright", box.col="white", bg="white", cex=0.7
-         ,title="Compared to\nOthers In\nBenchmark"
-         ,legend=c("Best","Worse","No Diff","Best at Bench")
-         ,pch=c(24,25,20,24)
-         ,pt.bg=c("blue","red","black","blue")
-         ,col=c("black","black","black","blue")
-         ,pt.cex=c(1,1,1,0.5)
-         ,lty=c(1,1,1,3))
-}
 axis(1, cex.axis=0.8); box()
+
+# Legend
+par(mar=c(0.5,8,0.5,0.5))
+plot(x=0, y=0, type="n", ann=FALSE, axes=FALSE)
+legend("topleft", box.col="white", bg="white", cex=0.7, ncol=2
+      ,title="Compared to Others In Benchmark"
+      ,legend=c("Best","Worse","No Diff","Best at Bench")
+      ,pch=c(24,25,20,24)
+      ,pt.bg=c("blue","red","black","blue")
+      ,col=c("black","black","black","blue")
+      ,pt.cex=c(1,1,1,0.5)
+      ,lty=c(1,1,1,3))
+
+legend("topright", box.col="white", bg="white", cex=0.7
+      ,title="Changes"
+      ,legend=tmLeg$Improve
+      ,pch=tmLeg$Improve_Label)
 
 if(meta$gen_pdf) {
    graphics.off()
