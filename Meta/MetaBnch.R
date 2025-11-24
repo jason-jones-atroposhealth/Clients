@@ -10,7 +10,7 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,bench = c(NA,"HealthBench")[1]
             ,gen_pdf = c(TRUE,FALSE)[2]
             ,sim_meta = c(TRUE,FALSE)[2]
-            ,top_llama_only = c(TRUE,FALSE)[1]
+            ,top_llama_only = c(TRUE,FALSE)[2]
             ,improve = c("-rag","-prompt")                                       #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
             )
@@ -315,7 +315,9 @@ if(meta$show_improvement!="Regular") {
    tmI <- merge(tmp[,c("Bench","Model","y")], tmI)
 
    # Plotting.
-   with(tmI, text(x=Center, y=y, labels=Improve_Label, cex=0.6, col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
+   with(tmI, text(x=Center, y=y, labels=Improve_Label, cex=0.6
+                 ,font=ifelse(Progress=="Same",1,2)
+                 ,col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
 }
 
 if(!is.null(tmI)) {
