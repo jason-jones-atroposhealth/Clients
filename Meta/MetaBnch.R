@@ -8,9 +8,9 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,exclude = c("atropos","System Publication")
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
             ,bench = c(NA,"HealthBench")[1]
-            ,gen_pdf = c(TRUE,FALSE)[2]
-            ,sim_meta = c(TRUE,FALSE)[2]
-            ,top_llama_only = c(TRUE,FALSE)[2]
+            ,gen_pdf = c(FALSE,TRUE)[2]
+            ,sim_meta = c(FALSE,TRUE)[1]
+            ,top_llama_only = c(FALSE,TRUE)[1]
             ,improve = c("-rag","-prompt")                                       #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
             )
@@ -274,7 +274,7 @@ if(one_model) {
 graphics.off()
 if(meta$gen_pdf) {
    fnm <- paste0(meta$ddr,"BenchmarkBaseline",gsub(" ","_",ifelse(one_model,paste0("_",meta$include),ifelse(meta$top_llama_only,"_TopOnly",""))),".pdf")
-   pdf(file=fnm, h=ifelse(one_model,4,12), w=6)
+   pdf(file=fnm, h=nrow(tmp)*0.07 + 5, w=6)
 }
 
 layout(matrix(c(1,2)), heights=c(10,1))
@@ -324,16 +324,16 @@ if(meta$show_improvement!="Regular") {
 axis(1, cex.axis=0.8); box()
 
 # Legend
-par(mar=c(0.5,8,0.5,0.5))
+par(mar=c(0.5,par("mar")[2],0.5,par("mar")[4]))
 plot(x=0, y=0, type="n", ann=FALSE, axes=FALSE)
 legend("topleft", box.col="white", bg="white", cex=0.7, ncol=2
       ,title="Compared to Others In Benchmark"
-      ,legend=c("Best","Worse","No Diff","Best at Bench")
-      ,pch=c(24,25,20,24)
-      ,pt.bg=c("blue","red","black","blue")
-      ,col=c("black","black","black","blue")
+      ,legend=c("Best","Worse","No Diff",ifelse(one_model,"Best at Bench",""))
+      ,pch=c(24,25,20,ifelse(one_model,24,NA))
+      ,pt.bg=c("blue","red","black",ifelse(one_model,"blue",NA))
+      ,col=c("black","black","black","blue",ifelse(one_model,"blue",NA))
       ,pt.cex=c(1,1,1,0.5)
-      ,lty=c(1,1,1,3))
+      ,lty=c(1,1,1,ifelse(one_model,3,NA)))
 
 legend("topright", box.col="white", bg="white", cex=0.7
       ,title="Changes"
@@ -348,4 +348,4 @@ if(meta$gen_pdf) {
 }
 
 all_models
-rm(all_models,tmp,tmI,one_model,limits_not_ci)
+rm(all_models,tmp,tmI,tmLeg,one_model,limits_not_ci)
