@@ -3,6 +3,7 @@ openai_o3	Green	2097	71.28
 openai_gpt5	Green	1974	67.10
 atropos	Green	1473	50.07
 gemini	Green	1252	42.56
+llama_mav4_choose_best	Green	1118	39.00
 claude	Green	827	28.11
 perplexity	Green	798	27.12
 llama_mav4	Green	414	14.07
@@ -12,6 +13,7 @@ llama_scout4	Green	303	10.30
 System Publication	Green	271	9.60
 llama_mav4	Yellow	1821	61.90
 claude	Yellow	1697	57.68
+llama_mav4_choose_best	Yellow	1452	50.65
 System Publication	Yellow	1360	48.19
 llama3_3	Yellow	1363	46.33
 llama_scout4	Yellow	1271	43.20
@@ -31,4 +33,5 @@ llama_mav4	Red	707	24.03
 gemini	Red	598	20.33
 claude	Red	418	14.21
 openai_o3	Red	374	12.71
+llama_mav4_choose_best	Red	297	10.36
 openai_gpt5	Red	98	3.33

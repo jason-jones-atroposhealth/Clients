@@ -5,13 +5,14 @@ rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,seed = 46664
             ,R = 1000
-            ,exclude = c("atropos","System Publication")
+            ,exclude = c("atropos","System Publication","gemini")
             ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
+            ,down_to = c(NA,"Llama 4 Maverick")[2]
             ,bench = c(NA,"HealthBench")[1]
             ,gen_pdf = c(FALSE,TRUE)[1]
             ,sim_meta = c(FALSE,TRUE)[1]
             ,top_llama_only = c(FALSE,TRUE)[1]
-            ,improve = c("-rag","-prompt")                                       #Improvements in time order.
+            ,improve = c("-rag","-prompt","-alexandria_p")                  #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
             )
 
@@ -121,6 +122,7 @@ dfL$awe <- data.table::fread(paste0(meta$ddr,"answered_with_evidence_summary.tsv
 tmp <- as.data.frame(subset(dfL$awe, badge %in% c("Green","Red")))
 names(tmp)[which(names(tmp)=="provider")] <- "Model"
 names(tmp)[which(names(tmp)=="pct_of_provider")] <- "Center"
+tmp$Model <- gsub("_choose_best","-alexandria_p",tmp$Model)
 tmp$Center <- tmp$Center / 100
 tmp$Center[tmp$badge=="Red"] <- 1-tmp$Center[tmp$badge=="Red"]
 tmp$badge <- ifelse(tmp$badge=="Green","01.Green","02.Red (reverse scored)")
@@ -137,7 +139,7 @@ dfS <- dplyr::bind_rows(dfS, tmp[,c("Bench","Model","n","Center","L95","U95")])
 rm(tmp)
 
 # CPC.
-dfL$cpc <- data.table::fread(paste0(meta$ddr,"cpc_diagnosis_judgements-gemini25flashlite.csv"))
+dfL$cpc <- data.table::fread(paste0(meta$ddr,"cpc_diagnosis_judgements_20251124.tsv"))
 dfL$cpc$candidate_id <- gsub("meta-llama/","",dfL$cpc$candidate_id)
 dfL$cpc$correct <- with(dfL$cpc, ifelse(is.na(correct_diagnosis_index), 0, 1))
 tmp <- data.table::data.table(aggregate(correct ~ candidate_id + case_id, data=dfL$cpc, FUN=mean))
@@ -212,8 +214,18 @@ rm(tmI,tmB)
 # Plotting
 tmp <- dfS[order(dfS$Bench, -dfS$Center),]
 tmp <- subset(tmp, !(tolower(Model) %in% tolower(meta$exclude)))
-if(any(!is.na(meta$bench))) tmp <- tmp[grep(paste(meta$bench,collapse="|"),tmp$Bench),]
-if(meta$show_improvement!="Regular") tmp <- subset(tmp, Improve=="" | Best==1 | BestMeta==1)
+if(all(is.na(meta$down_to))) {
+   if(any(!is.na(meta$bench))) tmp <- tmp[grep(paste(meta$bench,collapse="|"),tmp$Bench),]
+   if(meta$show_improvement!="Regular") tmp <- subset(tmp, Improve=="" | Best==1 | BestMeta==1)
+} else {
+   tmT <- subset(dfS, Model==meta$down_to)[,c("Bench","Center")]
+   names(tmT)[2] <- "Min"
+   tmp <- merge(tmp, tmT)
+   tmp <- subset(tmp, Center >= Min)
+   tmp$Min <- NULL
+}
+
+tmp <- tmp[order(tmp$Bench, -tmp$Center),]
 
 all_models <- sort(unique(tmp$Model))
 
@@ -274,11 +286,14 @@ if(one_model) {
 graphics.off()
 if(meta$gen_pdf) {
    fnm <- paste0(meta$ddr,"BenchmarkBaseline",gsub(" ","_",ifelse(one_model,paste0("_",meta$include),ifelse(meta$top_llama_only,"_TopOnly",""))),".pdf")
-   pdf(file=fnm, h=nrow(tmp)*0.07 + 5, w=6)
+   #pdf(file=fnm, h=nrow(tmp)*0.07 + 6, w=6)
+   #pdf(file=fnm, h=6, w=6)
+   pdf(file=fnm, h=10, w=6)
 }
 
+layout(matrix(c(1,2)), heights=c(10,2))
 layout(matrix(c(1,2)), heights=c(10,1))
-par(mar=c(2,ifelse(one_model,16,8),1,0.5), cex=0.8)
+par(mar=c(2,ifelse(one_model,16,10),1,0.5), cex=0.8)
 plot(x=c(0,1), y=range(tmp$y)+c(-1,1), type="n", ann=FALSE, axes=FALSE, yaxs="i")
 if(!one_model) with(subset(tmp, BestMeta==1), rect(xleft=-10, xright=10, ybot=y-0.5, ytop=y+0.5, border=NA, col="khaki1"))
 abline(v=axTicks(1), col="lightgray", lty=1)
@@ -348,4 +363,4 @@ if(meta$gen_pdf) {
 }
 
 all_models
-rm(all_models,tmp,tmI,tmLeg,one_model,limits_not_ci)
+#rm(all_models,tmp,tmI,tmLeg,one_model,limits_not_ci)
