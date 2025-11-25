@@ -1,13 +1,16 @@
 # Workbench Sources:
-# Using first regimen start: https://workbench.atroposhealth.biz/case/c1cc2646-0be9-47ef-b381-aa32a5cc0f1e/
-# Using last regimen start: https://workbench.atroposhealth.biz/case/4443d682-ae55-438e-b1e0-519455348804/
+# Using first regimen start: https://workbench.atroposhealth.biz/case/618529f9-621a-4c26-9457-e4d6603d4e98/
+# Using last regimen start: https://workbench.atroposhealth.biz/case/48927b9e-8f21-4efb-a0e0-8d19284b75d9/
+# Using last regimen within 5 years of start: https://workbench.atroposhealth.biz/case/32b0d753-d5cd-4c06-a852-eb15c74525ee/
 
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr   = "~/Downloads/OtsukaSzBP1/"
             ,years = 2015:2025
             ,strat = c("intervention","src")[1]
-            ,src   = c("all","Sz A Last")[1]
+            ,src   = c("all","Sz A Last5y")[2]
+            ,lmt_fu = c(NA,"12mo")[2]
+            ,tgt_prim = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             )
 
 fls <- list.files(meta$ddr,".*csv")
@@ -83,6 +86,15 @@ vls <- list(id =c("src","patient_id","index_date")
 )
 vls$tgt <- unique(c(vls$tgt[grep("12mo",vls$tgt)],vls$tgt[grep("6mo",vls$tgt)],vls$tgt[grep("3mo",vls$tgt)]),vls$tgt)
 vls$pot <- unique(c("age","age_group",setdiff(names(dfA), unlist(vls))))
+if(all(!is.na(meta$lmt_fu))) vls$tgt <- vls$tgt[grep(paste(meta$lmt_fu,collapse="|"),vls$tgt)]
+if(all(!is.na(meta$tgt_prim))) {
+   vln <- NULL
+   x <- meta$tgt_prim
+   for(x in meta$tgt_prim) vln <- c(vln, vls$tgt[grep(x,vls$tgt)])
+   rm(x)
+   vls$tgt <- unique(c(vln,vls$tgt))
+   rm(vln)
+}
 
 for(n in rev(sort(vls$pot[grep("charl|cci_",vls$pot)]))) {
    vls$pot <- .fncMov(vls$pot, itm=n, aft="index_year")
@@ -104,8 +116,10 @@ if(any(tolower(meta$src)=="all")) {
    tmp <- subset(dfA, tolower(src) %in% tolower(meta$src))
 }
 
+tmp$index_year <- paste0("y",tmp$index_year)
+
 fct <- vls$t1[which(sapply(tmp[,vls$t1], function(x) class(x)[1] %in% c("character","factor") | all(x %in% c(0,1,NA))))]
-fct <- c(fct,"index_year")
+fct <- unique(c(fct,"index_year"))
 
 tb1 <- tableone::CreateTableOne(vars=vls$t1, factorVars=fct, strata=meta$strat, data=tmp
                                ,includeNA=TRUE, test=FALSE)
