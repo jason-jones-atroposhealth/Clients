@@ -6,11 +6,10 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,seed = 46664
             ,R = 1000
             ,exclude = c("atropos","System Publication","gemini")
-            ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
-            ,down_to = c(NA,"Llama 4 Maverick")[2]
+            ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[2]
+            ,down_to = c(NA,"Llama 4 Maverick")[1]
             ,bench = c(NA,"HealthBench")[1]
-            ,gen_pdf = c(FALSE,TRUE)[1]
-            ,sim_meta = c(FALSE,TRUE)[1]
+            ,gen_pdf = c(FALSE,TRUE)[2]
             ,top_llama_only = c(FALSE,TRUE)[1]
             ,improve = c("-rag","-prompt","-alexandria_p")                  #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
@@ -229,14 +228,6 @@ tmp <- tmp[order(tmp$Bench, -tmp$Center),]
 
 all_models <- sort(unique(tmp$Model))
 
-tmp$MetaFab <- NA
-set.seed(meta$seed)
-if(meta$sim_meta) {
-   x <- tmp$Center[tmp$Model=="Llama 4 Maverick"]
-   y <- with(tmp, tapply(Center, Bench, max))
-   tmp$MetaFab[tmp$Model=="Llama 4 Maverick"] <- runif(length(x), min=x, max=y)
-}
-
 if(any(!is.na(meta$include))) tmp <- subset(tmp, tolower(Model) %in% tolower(meta$include))
 one_model <- ifelse(length(unique(tmp$Model))==1,TRUE,FALSE)
 
@@ -286,14 +277,11 @@ if(one_model) {
 graphics.off()
 if(meta$gen_pdf) {
    fnm <- paste0(meta$ddr,"BenchmarkBaseline",gsub(" ","_",ifelse(one_model,paste0("_",meta$include),ifelse(meta$top_llama_only,"_TopOnly",""))),".pdf")
-   #pdf(file=fnm, h=nrow(tmp)*0.07 + 6, w=6)
-   #pdf(file=fnm, h=6, w=6)
-   pdf(file=fnm, h=10, w=6)
+   pdf(file=fnm, h=max(c(4,(nrow(tmp)+6)*0.12)), w=6)
 }
 
-layout(matrix(c(1,2)), heights=c(10,2))
-layout(matrix(c(1,2)), heights=c(10,1))
-par(mar=c(2,ifelse(one_model,16,10),1,0.5), cex=0.8)
+layout(matrix(c(1,2)), heights=c(nrow(tmp)+6,6))
+par(mar=c(2,ifelse(one_model,15,10),1,0.5), cex=0.8)
 plot(x=c(0,1), y=range(tmp$y)+c(-1,1), type="n", ann=FALSE, axes=FALSE, yaxs="i")
 if(!one_model) with(subset(tmp, BestMeta==1), rect(xleft=-10, xright=10, ybot=y-0.5, ytop=y+0.5, border=NA, col="khaki1"))
 abline(v=axTicks(1), col="lightgray", lty=1)
@@ -303,13 +291,11 @@ with(subset(tmp, is.na(Center)), text(x=par("usr")[2], y=y, labels=Showing, pos=
 for(i in 1:nrow(tmp)) {
    if(one_model) with(tmp[i,], lines(x=c(Center,BestCenter), y=c(y,y), lty=3, col="lightblue"))
    with(tmp[i,], lines(x=c(L95,U95), y=c(y,y), col=ifelse(limits_not_ci,"gray","black")))
-   with(tmp[i,], lines(x=c(Center,MetaFab), y=c(y,y)))
 }
 rm(i)
 if(one_model) with(tmp, points(x=BestCenter, y=y, pch=24, bg="blue", col="blue", cex=0.5))
 with(tmp, points(x=Center, y=y, pch=20))
 with(subset(tmp, Improve!=""), points(x=Center, y=y, pch=1, cex=2))
-with(tmp, points(x=MetaFab, y=y, pch=23, bg="gold", cex=1.5))
 with(subset(tmp, Best==1), points(x=Center, y=y, pch=24, bg="blue"))
 with(subset(tmp, Worse==1), points(x=Center, y=y, pch=25, bg="red"))
 if(one_model) {
@@ -342,7 +328,7 @@ axis(1, cex.axis=0.8); box()
 par(mar=c(0.5,par("mar")[2],0.5,par("mar")[4]))
 plot(x=0, y=0, type="n", ann=FALSE, axes=FALSE)
 legend("topleft", box.col="white", bg="white", cex=0.7, ncol=2
-      ,title="Compared to Others In Benchmark"
+      ,title="Compared to Others\nIn Benchmark", title.font=2
       ,legend=c("Best","Worse","No Diff",ifelse(one_model,"Best at Bench",""))
       ,pch=c(24,25,20,ifelse(one_model,24,NA))
       ,pt.bg=c("blue","red","black",ifelse(one_model,"blue",NA))
@@ -351,7 +337,8 @@ legend("topleft", box.col="white", bg="white", cex=0.7, ncol=2
       ,lty=c(1,1,1,ifelse(one_model,3,NA)))
 
 legend("topright", box.col="white", bg="white", cex=0.7
-      ,title="Changes"
+      ,ncol=ceiling(nrow(tmLeg) / 3)
+      ,title="Changes", title.font=2
       ,legend=tmLeg$Improve
       ,pch=tmLeg$Improve_Label)
 
