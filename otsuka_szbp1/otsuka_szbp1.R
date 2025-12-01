@@ -40,11 +40,22 @@ names(dfA) <- gsub("baseline_comorb","baseline",names(dfA))
 # Clean up intervention.
 x <- ox <- unique(dfA$intervention)
 x <- gsub("INTERVENTION_","",x)
-x <- tools::toTitleCase(tolower(gsub("\\.|\\_"," ",x)))
-x <- gsub("Ref ","\\.",x)
+x <- gsub("REF_","\\.",x)
+x <- gsub("ARIPIPRAZOLE|ABILIFY","ARI",x)
+x <- gsub("LONG.ACTING","LAI",x)
+x <- gsub("ARI.ASIMTUFII","Ari2MRTU",x)
+x <- gsub("ARI.MAINTENA","AOM",x)
+x <- gsub("NON.ARI.LAI","LAI.Other",x)
+x <- gsub("ARI.LAUROXIL","LAI.Ari.Laur",x)
+x <- gsub("ARI.ORAL","Oral.Ari",x)
+x <- gsub("CLOZAPINE","Clozapine",x)
+x <- gsub("ATYPICAL.NON.ARI","Oral.Atyp.Other",x)
+x <- gsub("TYPICAL","Typical",x)
 names(x) <- ox
 dfA$intervention <- x[dfA$intervention]
 rm(x,ox)
+
+data.frame(table(subset(dfA, src=="Sz A Last5y")$intervention))
 
 # Fix ethnicity.
 dfA$ethnicity[-grep("HISPANIC",dfA$ethnicity)] <- "Unknown"
