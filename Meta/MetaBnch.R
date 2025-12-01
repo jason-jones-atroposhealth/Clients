@@ -11,8 +11,9 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,bench = c(NA,"HealthBench")[1]
             ,gen_pdf = c(FALSE,TRUE)[2]
             ,top_llama_only = c(FALSE,TRUE)[1]
-            ,improve = c("-rag","-prompt","-alexandria_p")                  #Improvements in time order.
+            ,improve = c("-rag","-prompt","-multi","-alexandria_p")              #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
+            ,last_improvement = c(FALSE,TRUE)[2]
             )
 
 # Function to get summary of benchmark using bootstrap.
@@ -68,6 +69,7 @@ for(f in fnm) {
    rm(jsn,val,x,b,ci)
 }
 tmp$Model <- gsub("databricks-","",tmp$Model)
+tmp$Model <- gsub("-rag","-multi",tmp$Model)
 dfL$med_helm <- tmp
 rm(f,fnm,tmp)
 
@@ -89,6 +91,7 @@ for(f in fnm) {
 }
 rm(fnm,f)
 tmp$model <- gsub("-enhanced-prompt","-prompt", tmp$model)
+tmp$model <- gsub("-prompt-completeness-3","-prompt2", tmp$model)
 tmp <- merge(tmp, tmp[, .(run_id = max(run_id)), by=model])
 tmp$rubric_criterion_index <- NULL
 tmp$v <- as.numeric(as.factor(tmp$v))-1
@@ -149,11 +152,13 @@ rm(tmp)
 dfS <- dplyr::bind_rows(dfS, .fncBnchDist(data=as.data.frame(dfL$cpc), bench="CPC"))
 
 dfS$Improve <- ""
-for(i in meta$improve) {
-   dfS$Improve[grep(i,dfS$Model)] <- paste(i, dfS$Improve[grep(i,dfS$Model)])
+for(i in apply(expand.grid(meta$improve, c("",1:5)), 1, paste, collapse = "")) {
+   dfS$Improve[grep(paste0(i,"$"),dfS$Model)] <- paste(i, dfS$Improve[grep(paste0(i,"$"),dfS$Model)])
 }
 rm(i)
-   
+
+data.frame(table(dfS$Improve))
+
 # Rename models for consistency.
 dfS$Model_Orig <- dfS$Model
 dfS$Model[grep("llama3_1|llama-3.1-8b",dfS$Model)] <- "Llama 3.1 8b"
@@ -173,12 +178,12 @@ print(meta$model_map)
 
 # Label best and worse within benchmarks.
 dfS <- dfS[order(dfS$Bench, -dfS$Center),]
-dfS$BestCenter <- NA
+dfS$Center_Best <- NA
 dfS[,c("Best","Worse","BestMeta","Meta")] <- 0
 dfS$Meta[grep("llama",tolower(dfS$Model))] <- 1
 for(n in unique(dfS$Bench)) {
    tmp <- dfS[dfS$Bench==n,][1,c("Center","L95")]
-   dfS$BestCenter[dfS$Bench==n] <- tmp$Center
+   dfS$Center_Best[dfS$Bench==n] <- tmp$Center
    dfS$Best[dfS$Bench==n & dfS$Center==tmp$Center] <- 1
    dfS$Worse[dfS$Bench==n & dfS$Center < tmp$L95] <- 1
    rm(tmp)
@@ -194,9 +199,10 @@ tmI <- subset(dfS, Improve!="")[,c("Bench","Model","Center","Improve")]
 tmI$Base <- NA
 for(i in 1:nrow(tmI)) tmI$Base[i] <- gsub(tmI$Improve[i], "", tmI$Model[i])
 
-tmB <- subset(dfS, Model %in% tmI$Base)[,c("Bench","Model","L95","U95")]
+tmB <- subset(dfS, Model %in% tmI$Base)[,c("Bench","Model","Center","L95","U95")]
 names(tmB)[which(names(tmB)=="Model")] <- "Base"
 names(tmB) <- gsub("95","95_Base",names(tmB))
+names(tmB) <- gsub("Center","Center_Base",names(tmB))
 
 tmI <- merge(tmI, tmB)
 tmI$Progress <- with(tmI, ifelse(Center > U95_Base,"Better", ifelse(Center < L95_Base, "Worse", "Same")))
@@ -206,7 +212,14 @@ tmLeg <- unique(tmI[,c("Improve","Improve_Label")])
 tmI$Improve <- tmI$Center <- NULL
 
 dfS <- merge(dfS, tmI, all.x=TRUE)
+dfS$Improve_Type <- gsub("[0-9]+", "", dfS$Improve)
 rm(tmI,tmB)
+
+# Get latest improvement for each benchmark and base model.
+tmI <- aggregate(Improve ~ ., data=dfS[,c("Bench","Base","Improve_Type","Improve")], FUN=max)
+tmI$Improve_Last <- 1
+dfS <- merge(dfS, tmI, all.x=TRUE)
+dfS$Improve_Last[is.na(dfS$Improve_Last)] <- 0
 
 #print(dfS, row.names=FALSE)
 
@@ -215,7 +228,7 @@ tmp <- dfS[order(dfS$Bench, -dfS$Center),]
 tmp <- subset(tmp, !(tolower(Model) %in% tolower(meta$exclude)))
 if(all(is.na(meta$down_to))) {
    if(any(!is.na(meta$bench))) tmp <- tmp[grep(paste(meta$bench,collapse="|"),tmp$Bench),]
-   if(meta$show_improvement!="Regular") tmp <- subset(tmp, Improve=="" | Best==1 | BestMeta==1)
+   if(meta$show_improvement!="Regular") tmp <- subset(tmp, Improve=="" | Best==1 | BestMeta==1 | Improve_Last)
 } else {
    tmT <- subset(dfS, Model==meta$down_to)[,c("Bench","Center")]
    names(tmT)[2] <- "Min"
@@ -223,6 +236,11 @@ if(all(is.na(meta$down_to))) {
    tmp <- subset(tmp, Center >= Min)
    tmp$Min <- NULL
 }
+
+if(meta$last_improvement) tmp <- subset(tmp, !(Improve!="" & Improve_Last==0))
+
+dfS[intersect(grep("Completeness",dfS$Bench),grep("Maverick",dfS$Base)),]
+tmp[intersect(grep("Completeness",tmp$Bench),grep("Maverick",tmp$Base)),]
 
 tmp <- tmp[order(tmp$Bench, -tmp$Center),]
 
@@ -289,11 +307,11 @@ with(subset(tmp, is.na(Center)), rect(xleft=-10, xright=10, ybot=y-0.5, ytop=y+0
 with(subset(tmp, is.na(Center)), text(x=par("usr")[1], y=y, labels=Bench, pos=4, cex=0.8))
 with(subset(tmp, is.na(Center)), text(x=par("usr")[2], y=y, labels=Showing, pos=2, cex=0.6, col=gray(0.5)))
 for(i in 1:nrow(tmp)) {
-   if(one_model) with(tmp[i,], lines(x=c(Center,BestCenter), y=c(y,y), lty=3, col="lightblue"))
+   if(one_model) with(tmp[i,], lines(x=c(Center,Center_Best), y=c(y,y), lty=3, col="lightblue"))
    with(tmp[i,], lines(x=c(L95,U95), y=c(y,y), col=ifelse(limits_not_ci,"gray","black")))
 }
 rm(i)
-if(one_model) with(tmp, points(x=BestCenter, y=y, pch=24, bg="blue", col="blue", cex=0.5))
+if(one_model) with(tmp, points(x=Center_Best, y=y, pch=24, bg="blue", col="blue", cex=0.5))
 with(tmp, points(x=Center, y=y, pch=20))
 with(subset(tmp, Improve!=""), points(x=Center, y=y, pch=1, cex=2))
 with(subset(tmp, Best==1), points(x=Center, y=y, pch=24, bg="blue"))
@@ -313,6 +331,7 @@ if(meta$show_improvement!="Regular") {
    } else if(meta$show_improvement %in% c("Better","Worse")) {
       tmI <- subset(dfS, Progress %in% meta$show_improvement)
    }
+   if(meta$last_improvement) tmI <- subset(tmI, Improve_Last==1)
    tmI <- tmI[,c("Bench","Base","Center","Progress","Improve_Label")]
    names(tmI)[which(names(tmI)=="Base")] <- "Model"
    tmI <- merge(tmp[,c("Bench","Model","y")], tmI)
@@ -336,6 +355,9 @@ legend("topleft", box.col="white", bg="white", cex=0.7, ncol=2
       ,pt.cex=c(1,1,1,0.5)
       ,lty=c(1,1,1,ifelse(one_model,3,NA)))
 
+tmLeg <- tmLeg[-grep("[:0-9:]",tmLeg$Improve_Label),]
+tmLeg$Improve_Label <- substr(tmLeg$Improve_Label,1,1)
+
 legend("topright", box.col="white", bg="white", cex=0.7
       ,ncol=ceiling(nrow(tmLeg) / 3)
       ,title="Changes", title.font=2
@@ -351,3 +373,11 @@ if(meta$gen_pdf) {
 
 all_models
 #rm(all_models,tmp,tmI,tmLeg,one_model,limits_not_ci)
+
+#print(dfS[intersect(grep("MedHELM",dfS$Bench),grep("Maverick",dfS$Model)),c("Bench","Model","Improve","Center","Base","L95_Base","U95_Base","limits_not_ci","Progress")], row.names=FALSE)
+
+tmp <- dfS[intersect(grep("Maverick",dfS$Model),which(dfS$Improve_Last==1)),]
+tm2 <- aggregate(Center ~ ., data=tmp[,c("Bench","Base","Center")], FUN=max)
+tmp <- merge(tmp, tm2)[,c("Bench","Base","Improve","n","Center","Center_Base","L95_Base","U95_Base","Center_Best","Best","Worse","BestMeta","Progress","limits_not_ci")]
+tmp$Improve_Pct <- with(tmp, 100 * (Center-Center_Base) / Center_Base)
+print(tmp,row.names=FALSE)

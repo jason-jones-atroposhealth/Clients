@@ -1,0 +1,11 @@
+{
+  "name": "medication_qa",
+  "description": "MedicationQA is a benchmark composed of open-ended consumer health questionsspecifically focused on medications. Each example consists of a free-form questionand a corresponding medically grounded answer. The benchmark evaluates a model'sability to provide accurate, accessible, and informative medication-related responsesfor a lay audience.",
+  "tags": [
+    "knowledge",
+    "generation",
+    "question_answering",
+    "biomedical"
+  ],
+  "definition_path": "https://github.com/stanford-crfm/helm/blob/main/src/helm/benchmark/scenarios/medication_qa_scenario.py"
+}
