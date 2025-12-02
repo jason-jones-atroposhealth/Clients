@@ -14,6 +14,7 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,improve = c("-rag","-prompt","-multi","-alexandria_p")              #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
             ,last_improvement = c(FALSE,TRUE)[2]
+            ,image_show = c("base","best","improve_best","improve_all")[1:4]
             )
 
 # Function to get summary of benchmark using bootstrap.
@@ -307,11 +308,11 @@ with(subset(tmp, is.na(Center)), rect(xleft=-10, xright=10, ybot=y-0.5, ytop=y+0
 with(subset(tmp, is.na(Center)), text(x=par("usr")[1], y=y, labels=Bench, pos=4, cex=0.8))
 with(subset(tmp, is.na(Center)), text(x=par("usr")[2], y=y, labels=Showing, pos=2, cex=0.6, col=gray(0.5)))
 for(i in 1:nrow(tmp)) {
-   if(one_model) with(tmp[i,], lines(x=c(Center,Center_Best), y=c(y,y), lty=3, col="lightblue"))
+   if(one_model & "best" %in% meta$image_show) with(tmp[i,], lines(x=c(Center,Center_Best), y=c(y,y), lty=3, col="lightblue"))
    with(tmp[i,], lines(x=c(L95,U95), y=c(y,y), col=ifelse(limits_not_ci,"gray","black")))
 }
 rm(i)
-if(one_model) with(tmp, points(x=Center_Best, y=y, pch=24, bg="blue", col="blue", cex=0.5))
+if(one_model & "best" %in% meta$image_show) with(tmp, points(x=Center_Best, y=y, pch=24, bg="blue", col="blue", cex=0.5))
 with(tmp, points(x=Center, y=y, pch=20))
 with(subset(tmp, Improve!=""), points(x=Center, y=y, pch=1, cex=2))
 with(subset(tmp, Best==1), points(x=Center, y=y, pch=24, bg="blue"))
@@ -337,9 +338,16 @@ if(meta$show_improvement!="Regular") {
    tmI <- merge(tmp[,c("Bench","Model","y")], tmI)
 
    # Plotting.
-   with(tmI, text(x=Center, y=y, labels=Improve_Label, cex=0.6
-                 ,font=ifelse(Progress=="Same",1,2)
-                 ,col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
+   if("improve_all" %in% meta$image_show) {
+      with(tmI, text(x=Center, y=y, labels=Improve_Label, cex=0.6
+                    ,font=ifelse(Progress=="Same",1,2)
+                    ,col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
+   } else if("improve_best" %in% meta$image_show) {
+      tmI <- merge(tmI, aggregate(Center ~ ., data=tmI[,c("Bench","Model","Center")], FUN=max))
+      with(tmI, text(x=Center, y=y, labels=Improve_Label, cex=0.6
+                     ,font=ifelse(Progress=="Same",1,2)
+                     ,col=ifelse(Progress=="Worse","red", ifelse(Progress=="Better","blue", "black"))))
+   }
 }
 axis(1, cex.axis=0.8); box()
 
@@ -381,3 +389,8 @@ tm2 <- aggregate(Center ~ ., data=tmp[,c("Bench","Base","Center")], FUN=max)
 tmp <- merge(tmp, tm2)[,c("Bench","Base","Improve","n","Center","Center_Base","L95_Base","U95_Base","Center_Best","Best","Worse","BestMeta","Progress","limits_not_ci")]
 tmp$Improve_Pct <- with(tmp, 100 * (Center-Center_Base) / Center_Base)
 print(tmp,row.names=FALSE)
+
+clip <- pipe("pbcopy", "w")                       
+write.table(tmp, file=clip, quote=FALSE, sep="\t", na="", row.names=FALSE)                               
+close(clip)
+rm(clip)
