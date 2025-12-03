@@ -2,13 +2,15 @@
 # Using first regimen start: https://workbench.atroposhealth.biz/case/618529f9-621a-4c26-9457-e4d6603d4e98/
 # Using last regimen start: https://workbench.atroposhealth.biz/case/48927b9e-8f21-4efb-a0e0-8d19284b75d9/
 # Using last regimen within 5 years of start: https://workbench.atroposhealth.biz/case/32b0d753-d5cd-4c06-a852-eb15c74525ee/
+# Using last regimen within 3 years of start: https://workbench.atroposhealth.biz/case/0422788f-2f5b-428b-bbde-1ca612adfe86/
+# Using last regimen within 2 years of start: https://workbench.atroposhealth.biz/case/0a32fa1d-4a44-45c8-9501-ded4c5cc3e17/
 
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr   = "~/Downloads/OtsukaSzBP1/"
             ,years = 2015:2025
             ,strat = c("intervention","src")[1]
-            ,src   = c("all","Sz A Last5y")[2]
+            ,src   = c("all","Sz A Last2y")[2]
             ,lmt_fu = c(NA,"12mo")[2]
             ,tgt_prim = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             )
@@ -17,7 +19,7 @@ fls <- list.files(meta$ddr,".*csv")
 
 dfA <- NULL
 for(f in fls) {
-   m <- tools::toTitleCase(gsub("_"," ",gsub("data_processed_|.csv","",f)))
+   m <- tools::toTitleCase(gsub("_"," ",gsub("data_processed_|.csv|.gz","",f)))
    m <- gsub("Arcadia","A", gsub("Forian","F", gsub("Norstella","N", m)))
    tmp <- as.data.frame(data.table::fread(paste0(meta$ddr,f)))
    tmp$src <- m
