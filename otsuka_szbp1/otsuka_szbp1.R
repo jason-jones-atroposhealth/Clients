@@ -9,8 +9,8 @@ rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr   = "~/Downloads/OtsukaSzBP1/"
             ,years = 2015:2025
-            ,strat = c("intervention","src")[1]
-            ,src   = c("all","Sz A Last2y")[2]
+            ,strat = c("intervention","src")[2]
+            ,src   = c("all","Sz A Last2y")[1]
             ,lmt_fu = c(NA,"12mo")[2]
             ,tgt_prim = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             )
