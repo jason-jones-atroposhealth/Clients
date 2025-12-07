@@ -7,12 +7,17 @@
 
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
-meta <- list(ddr   = "~/Downloads/OtsukaSzBP1/"
-            ,years = 2015:2025
-            ,strat = c("intervention","src")[2]
-            ,src   = c("all","Sz A Last2y")[1]
-            ,lmt_fu = c(NA,"12mo")[2]
-            ,tgt_prim = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
+meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
+            ,years              = 2015:2025
+            ,strat              = c("intervention","src")[1]
+            ,src                = c("all","Sz A Last2y")[2]
+            ,lmt_fu             = c(NA,"12mo")[2]
+            ,tgt_prim           = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
+            ,sdn                = 1221                                           #Random number seed for reproducibility.
+            ,train_pct          = 0.70                                           #Percent of available sample to use for training.
+            ,focus_target       = c(outcome_receipt.of.mood.stabilizers.12mo=2   #Focus targets in rank order for reporting and train/test split matching (NA will mean all targets)
+                                  )
+            ,focus_intervention = c(Ari2MRTU=2)                                  #Focused cohort(s) in rank order for reporting and train/test split matching (NA will mean no primary)
             )
 
 fls <- list.files(meta$ddr,".*csv")
@@ -85,6 +90,7 @@ for(n in names(dfA)[grep("days_",names(dfA))]) {
    dfA[[n]] <- dfA[[n]] / 365.25
    names(dfA)[which(names(dfA)==n)] <- gsub("days_","years_",n)
 }
+rm(n)
 
 # Add follow-up < 1 yr.
 dfA$years_followup_gt1 <- with(dfA, ifelse(years_followup >= 1,1,0))
@@ -95,6 +101,45 @@ for(n in c("03mo","06mo","12mo")) {
                                                                    | dfA[[paste0("outcome_regimen.change.",n)]]==1
                                                                    , 1, 0)
 }
+rm(n)
+
+# Add train/validation flag.
+# Randomly assign train/test groups by most closely matching full distribution
+# across targets and interventions.
+if(any(tolower(meta$src)=="all")) {
+   tmp <- dfA
+} else {
+   tmp <- subset(dfA, tolower(src) %in% tolower(meta$src))
+}
+
+tmp <- as.data.frame(model.matrix(~.-1, data=tmp[,c(names(meta$focus_target),"intervention")]))
+names(tmp) <- gsub("intervention","",names(tmp))
+
+ful <- aggregate(. ~ 0, data=tmp, FUN=mean)
+# Weight outcome rates based upon focus (can increase contribution to mean absolute difference)
+ful[,names(meta$focus_target)] <- ful[,names(meta$focus_target)] * meta$focus_target
+ful[,names(meta$focus_intervention)] <- ful[,names(meta$focus_intervention)] * meta$focus_intervention
+
+rnd_mad <- NULL
+for(i in 1:10^2) {
+   set.seed(i)
+   rid <- sample(nrow(tmp), size=nrow(tmp)*meta$train_pct)
+   cmp <- aggregate(. ~ 0, data=tmp[rid,], FUN=mean)
+   # Weight outcome rates based upon focus (can increase contribution to mean absolute difference)
+   cmp[,names(meta$focus_target)] <- cmp[,names(meta$focus_target)] * meta$focus_target
+   ful[,names(meta$focus_intervention)] <- ful[,names(meta$focus_intervention)] * meta$focus_intervention
+   if(length(na.omit(meta$PrimaryCohort)) > 0) cmp <- cmp[cmp$intervention %in% as.character(na.omit(meta$PrimaryCohort)),]
+   if(nrow(cmp) < length(unique(tmp$Src))) next
+   rnd_mad <- c(rnd_mad, sum(abs(ful[,-1] - cmp[,-1])))
+   rm(rid,cmp)
+}
+rm(i)
+
+meta$train_sdn <- which(rnd_mad==min(rnd_mad))[1]
+set.seed(meta$train_sdn)
+dfA$set <- "Test"
+dfA$set[sample(nrow(dfA), size=nrow(dfA)*meta$train_pct)] <- "Train"
+rm(ful,tmp,rnd_mad)
 
 # Function for moving items in vector to after a named one.
 .fncMov <- function(x, itm, aft=NA) {
@@ -105,7 +150,7 @@ for(n in c("03mo","06mo","12mo")) {
        ,setdiff((dst+1):length(x),sdx))]
 }
 
-vls <- list(id =c("src","patient_id","index_date")
+vls <- list(id   =c("src","patient_id","index_date","set")
             ,tgt = names(dfA)[grep("outcome",names(dfA))]
             ,trt = "intervention"
             ,rem = c(names(dfA)[grep("outstart|log_|start_int|end_int|_date",names(dfA))]
@@ -130,6 +175,7 @@ if(all(!is.na(meta$tgt_prim))) {
 for(n in rev(sort(vls$pot[grep("charl|cci_",vls$pot)]))) {
    vls$pot <- .fncMov(vls$pot, itm=n, aft="index_year")
 }
+rm(n)
 
 if(tolower(meta$strat)=="src") {
    vls$t1 <- c(vls$tgt,"intervention",vls$pot)
@@ -192,3 +238,30 @@ write.table(dfD, file=clip, quote=FALSE, sep="\t", na="", row.names=FALSE)
 close(clip)
 rm(clip)
 
+# Build xgboost model for treatment.
+tmp$y <- tmp[[vls$tgt]]
+prm <- list(objective="multi:softprob")
+trn <- !is.na(tmp$y)
+
+set.seed(meta$seed)
+xcv <- NULL; i <- 0
+while(is.null(xcv) & i < 10) {
+   try(xcv <- xgboost::xgb.cv(data=data.matrix(X[trn,]), label=tmp$y[trn]
+                              ,objective=prm$objective, metrics=prm$eval_metric
+                              ,eta=0.1, nfold=5, verbose=FALSE
+                              ,nrounds=100, early_stopping_rounds=50), TRUE)
+   i <- i+1
+}
+rm(i)
+
+set.seed(meta$sdn)
+mdl <- NULL; i <- 0
+while(is.null(mdl) & i < 10) {
+   mdl <- xgboost::xgboost(data=data.matrix(X[trn,]), label=tmp$y[trn]
+                           ,params=prm, eta=xcv$param$eta, verbose=FALSE
+                           ,reg_alpha=1, reg_lambda=2
+                           ,min_child_weight=2
+                           ,nrounds=xcv$best_iteration)
+   i <- i+1
+}
+rm(i)
