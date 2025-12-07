@@ -15,8 +15,12 @@ meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
             ,tgt_prim           = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             ,sdn                = 1221                                           #Random number seed for reproducibility.
             ,train_pct          = 0.70                                           #Percent of available sample to use for training.
-            ,focus_target       = c(outcome_receipt.of.mood.stabilizers.12mo=2   #Focus targets in rank order for reporting and train/test split matching (NA will mean all targets)
-                                  )
+            ,focus_target       = c(outcome_ip.visit.or.regimen.change.12mo=2    #Focus targets in rank order for reporting and train/test split matching (NA will mean all targets)
+                                   ,outcome_ip.visit.any.12mo=1
+                                   ,outcome_regimen.change.12mo=1
+                                   ,outcome_ip.visit.psych.diagnosis.12mo=1
+                                   ,outcome_er.visit.psych.diagnosis.12mo=1
+                                   )
             ,focus_intervention = c(Ari2MRTU=2)                                  #Focused cohort(s) in rank order for reporting and train/test split matching (NA will mean no primary)
             )
 
@@ -38,12 +42,15 @@ dfA$V1 <- NULL
 
 # Fix names.
 names(dfA) <- tolower(names(dfA))
+names(dfA) <- gsub("_disc","_cnt",names(dfA))
 names(dfA) <- gsub("comorb_","cci_",names(dfA))
 names(dfA) <- gsub("baseline_baseline","baseline",names(dfA))
 names(dfA) <- gsub("followup\\.|\\.disorder|_cont|_bin","",names(dfA))
 names(dfA) <- gsub("blood\\.pressure","bp",names(dfA))
 names(dfA) <- gsub("baseline_comorb","baseline",names(dfA))
 names(dfA) <- gsub("inpatient","ip",names(dfA))
+names(dfA) <- gsub("baseline_prior|baseline_scores","baseline",names(dfA))
+names(dfA) <- gsub("number\\.of\\.regimens\\.previously","regimens\\.prior",names(dfA))
 names(dfA) <- gsub("\\.followup","",names(dfA))
 names(dfA) <- gsub("\\.3m","\\.03m",names(dfA))
 names(dfA) <- gsub("\\.6m","\\.06m",names(dfA))
@@ -210,7 +217,7 @@ write.table(meta$tb1, file=clip, quote=FALSE, sep="\t", na="")
 close(clip)
 rm(clip)
 
-3 * "a"
+#3 * "a"
 
 tmp <- readLines(paste0(meta$ddr,"query.tql"))
 X <- tmp[intersect(grep("^var",tmp),grep("rx\\(|rx\\=",gsub(" ","",tolower(tmp))))]
@@ -244,24 +251,55 @@ rm(clip)
 
 # Build xgboost model for treatment.
 y <- as.integer(as.factor(dfA[dfA$set=="Train",vls$trt]))-1
-X <- data.matrix(dfA[dfA$set=="Train",vls$pot[-grep("followup",vls$pot)]])
-prm <- list(objective="multi:softprob", num_class=length(unique(y)))
+X <- data.matrix(dfA[dfA$set=="Train",vls$pot[-grep("followup|baseline_regimens.prior_cnt",vls$pot)]])
+prm <- list(objective="multi:softprob"
+           ,eta=0.1
+           ,reg_alpha=1000, reg_lambda=2
+           ,num_class=length(unique(y)))
 
 set.seed(meta$sdn)
+tin <- Sys.time()
+xcv <- list()
+xcv$best_iteration <- 100
 xcv <- xgboost::xgb.cv(data=X, label=y
-                      ,objective=prm$objective, metrics=prm$eval_metric, num_class=prm$num_class
-                      ,eta=0.1, nfold=5, verbose=FALSE
+                      ,params=prm
+                      ,nfold=5
+                      ,verbose=FALSE
                       ,nrounds=100, early_stopping_rounds=50)
-
+xcv$best_iteration
+Sys.time() - tin
 
 set.seed(meta$sdn)
-mdl <- NULL; i <- 0
-while(is.null(mdl) & i < 10) {
-   mdl <- xgboost::xgboost(data=data.matrix(X[trn,]), label=tmp$y[trn]
-                           ,params=prm, eta=xcv$param$eta, verbose=FALSE
-                           ,reg_alpha=1, reg_lambda=2
-                           ,min_child_weight=2
-                           ,nrounds=xcv$best_iteration)
-   i <- i+1
-}
-rm(i)
+tin <- Sys.time()
+mdl <- xgboost::xgboost(data=X, label=y
+                        ,params=prm
+                        ,verbose=FALSE
+                        ,min_child_weight=2
+                        ,nrounds=xcv$best_iteration)
+vmp <- xgboost::xgb.importance(mdl$feature_names, mdl)
+xgboost::xgb.plot.importance(vmp[,1:2], rel_to_first=TRUE, xlab="Relative importance")
+vmp
+Sys.time() - tin
+
+mtx <- with(dfA, table(intervention, baseline_regimens.prior_cnt))
+mtx / rowSums(mtx)
+rm(mtx)
+
+vls$t2 <- unique(c(names(meta$focus_target),"baseline_regimens.prior_cnt",vmp$Feature))
+tmp <- dfA[,c("intervention",vls$t2)]
+tmp$baseline_regimens.prior_cnt <- paste0("c",tmp$baseline_regimens.prior_cnt)
+fct <- vls$t2[which(sapply(tmp[,vls$t2], function(x) class(x)[1] %in% c("character","factor") | all(x %in% c(0,1,NA))))]
+fct <- unique(c(fct,"index_year"))
+
+tb1 <- tableone::CreateTableOne(vars=vls$t2, factorVars=fct, strata=meta$strat, data=tmp
+                                ,includeNA=TRUE, test=FALSE)
+rm(fct)
+
+tb1 <- print(tb1, missing=TRUE, smd=TRUE)
+meta$tb2 <- tb1
+rm(tb1)
+clip <- pipe("pbcopy", "w")                       
+write.table(meta$tb2, file=clip, quote=FALSE, sep="\t", na="")                               
+close(clip)
+rm(clip)
+
