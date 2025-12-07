@@ -38,6 +38,16 @@ names(dfA) <- gsub("baseline_baseline","baseline",names(dfA))
 names(dfA) <- gsub("followup\\.|\\.disorder|_cont|_bin","",names(dfA))
 names(dfA) <- gsub("blood\\.pressure","bp",names(dfA))
 names(dfA) <- gsub("baseline_comorb","baseline",names(dfA))
+names(dfA) <- gsub("inpatient","ip",names(dfA))
+names(dfA) <- gsub("\\.followup","",names(dfA))
+names(dfA) <- gsub("\\.3m","\\.03m",names(dfA))
+names(dfA) <- gsub("\\.6m","\\.06m",names(dfA))
+
+names(dfA)[grep("_3mo" ,names(dfA))] <- paste0(gsub("_3mo" ,"",names(dfA)[grep("_3mo" ,names(dfA))]),".03mo")
+names(dfA)[grep("_6mo" ,names(dfA))] <- paste0(gsub("_6mo" ,"",names(dfA)[grep("_6mo" ,names(dfA))]),".06mo")
+names(dfA)[grep("_12mo",names(dfA))] <- paste0(gsub("_12mo","",names(dfA)[grep("_12mo",names(dfA))]),".12mo")
+
+names(dfA) <- gsub("outcome\\.","outcome_",names(dfA))
 
 # Clean up intervention.
 x <- ox <- unique(dfA$intervention)
@@ -79,6 +89,13 @@ for(n in names(dfA)[grep("days_",names(dfA))]) {
 # Add follow-up < 1 yr.
 dfA$years_followup_gt1 <- with(dfA, ifelse(years_followup >= 1,1,0))
 
+# Add composite outcome any inpatient admission or regimen change (replicate Wu)
+for(n in c("03mo","06mo","12mo")) {
+   dfA[[paste0("outcome_ip.visit.or.regimen.change.",n)]] <- ifelse( dfA[[paste0("outcome_ip.visit.any.",n)]]==1
+                                                                   | dfA[[paste0("outcome_regimen.change.",n)]]==1
+                                                                   , 1, 0)
+}
+
 # Function for moving items in vector to after a named one.
 .fncMov <- function(x, itm, aft=NA) {
    sdx <- which(x %in% itm)
@@ -97,6 +114,7 @@ vls <- list(id =c("src","patient_id","index_date")
                     ,"days_record","icd9","icd10","cpt","rx","death"
                     ,"index_start","years_record")
 )
+vls$tgt <- unique(c(vls$tgt[grep("ip.visit.or.regimen",vls$tgt)],vls$tgt))
 vls$tgt <- unique(c(vls$tgt[grep("12mo",vls$tgt)],vls$tgt[grep("6mo",vls$tgt)],vls$tgt[grep("3mo",vls$tgt)]),vls$tgt)
 vls$pot <- unique(c("age","age_group",setdiff(names(dfA), unlist(vls))))
 if(all(!is.na(meta$lmt_fu))) vls$tgt <- vls$tgt[grep(paste(meta$lmt_fu,collapse="|"),vls$tgt)]
