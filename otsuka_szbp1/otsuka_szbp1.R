@@ -303,3 +303,35 @@ write.table(meta$tb2, file=clip, quote=FALSE, sep="\t", na="")
 close(clip)
 rm(clip)
 
+# Build xgboost model for treatment.
+y <- dfA[dfA$set=="Train",names(meta$focus_target)[1]]
+X <- data.matrix(dfA[dfA$set=="Train",vls$pot[-grep("followup|baseline_regimens.prior_cnt",vls$pot)]])
+prm <- list(objective="multi:softprob"
+            ,eta=0.1
+            ,reg_alpha=1000, reg_lambda=2
+            ,num_class=length(unique(y)))
+
+set.seed(meta$sdn)
+tin <- Sys.time()
+xcv <- list()
+xcv$best_iteration <- 100
+xcv <- xgboost::xgb.cv(data=X, label=y
+                       ,params=prm
+                       ,nfold=5
+                       ,verbose=FALSE
+                       ,nrounds=100, early_stopping_rounds=50)
+xcv$best_iteration
+Sys.time() - tin
+
+set.seed(meta$sdn)
+tin <- Sys.time()
+mdl <- xgboost::xgboost(data=X, label=y
+                        ,params=prm
+                        ,verbose=FALSE
+                        ,min_child_weight=2
+                        ,nrounds=xcv$best_iteration)
+vmp <- xgboost::xgb.importance(mdl$feature_names, mdl)
+xgboost::xgb.plot.importance(vmp[,1:2], rel_to_first=TRUE, xlab="Relative importance")
+vmp
+Sys.time() - tin
+
