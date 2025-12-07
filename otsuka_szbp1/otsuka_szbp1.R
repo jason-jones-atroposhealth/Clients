@@ -187,24 +187,26 @@ vls$t1 <- .fncMov(vls$t1, itm="years_followup_gt1", aft=tail(vls$t1[grep("outcom
 
 data.table::data.table(dfA[,vls$t1])
 
-if(any(tolower(meta$src)=="all")) {
-   tmp <- dfA
-} else {
-   tmp <- subset(dfA, tolower(src) %in% tolower(meta$src))
+bak <- dfA
+
+if(!any(tolower(meta$src)=="all")) {
+   dfA <- subset(dfA, tolower(src) %in% tolower(meta$src))
 }
 
-tmp$index_year <- paste0("y",tmp$index_year)
+dfA$index_year <- paste0("y",dfA$index_year)
 
-fct <- vls$t1[which(sapply(tmp[,vls$t1], function(x) class(x)[1] %in% c("character","factor") | all(x %in% c(0,1,NA))))]
+fct <- vls$t1[which(sapply(dfA[,vls$t1], function(x) class(x)[1] %in% c("character","factor") | all(x %in% c(0,1,NA))))]
 fct <- unique(c(fct,"index_year"))
 
-tb1 <- tableone::CreateTableOne(vars=vls$t1, factorVars=fct, strata=meta$strat, data=tmp
+tb1 <- tableone::CreateTableOne(vars=vls$t1, factorVars=fct, strata=meta$strat, data=dfA
                                ,includeNA=TRUE, test=FALSE)
-rm(fct,tmp)
+rm(fct)
 
 tb1 <- print(tb1, missing=TRUE, smd=TRUE)
+meta$tb1 <- tb1
+rm(tb1)
 clip <- pipe("pbcopy", "w")                       
-write.table(tb1, file=clip, quote=FALSE, sep="\t", na="")                               
+write.table(meta$tb1, file=clip, quote=FALSE, sep="\t", na="")                               
 close(clip)
 rm(clip)
 
@@ -231,28 +233,26 @@ for(n in names(rxcui)) {
 }
 rm(n)
 data.table::data.table(dfD)
-print(dfD, row.names=FALSE)
+
+meta$map_drug <- dfD
+rm(dfD)
 
 clip <- pipe("pbcopy", "w")                       
-write.table(dfD, file=clip, quote=FALSE, sep="\t", na="", row.names=FALSE)                               
+write.table(meta$map_drug, file=clip, quote=FALSE, sep="\t", na="", row.names=FALSE)                               
 close(clip)
 rm(clip)
 
 # Build xgboost model for treatment.
-tmp$y <- tmp[[vls$tgt]]
-prm <- list(objective="multi:softprob")
-trn <- !is.na(tmp$y)
+y <- as.integer(as.factor(dfA[dfA$set=="Train",vls$trt]))-1
+X <- data.matrix(dfA[dfA$set=="Train",vls$pot[-grep("followup",vls$pot)]])
+prm <- list(objective="multi:softprob", num_class=length(unique(y)))
 
-set.seed(meta$seed)
-xcv <- NULL; i <- 0
-while(is.null(xcv) & i < 10) {
-   try(xcv <- xgboost::xgb.cv(data=data.matrix(X[trn,]), label=tmp$y[trn]
-                              ,objective=prm$objective, metrics=prm$eval_metric
-                              ,eta=0.1, nfold=5, verbose=FALSE
-                              ,nrounds=100, early_stopping_rounds=50), TRUE)
-   i <- i+1
-}
-rm(i)
+set.seed(meta$sdn)
+xcv <- xgboost::xgb.cv(data=X, label=y
+                      ,objective=prm$objective, metrics=prm$eval_metric, num_class=prm$num_class
+                      ,eta=0.1, nfold=5, verbose=FALSE
+                      ,nrounds=100, early_stopping_rounds=50)
+
 
 set.seed(meta$sdn)
 mdl <- NULL; i <- 0
