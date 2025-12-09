@@ -6,15 +6,15 @@ meta <- list(ddr = "~/Documents/GitHub/Clients/Meta/data/"
             ,seed = 46664
             ,R = 1000
             ,exclude = c("atropos","System Publication","gemini")
-            ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[2]
-            ,down_to = c(NA,"Llama 4 Maverick")[1]
-            ,bench = c(NA,"HealthBench")[1]
+            ,include = c(NA,"Llama 4 Maverick","Llama 3.3 70B")[1]
+            ,down_to = c(NA,"Llama 4 Maverick")[2]
+            ,bench = c(NA,"HealthBench")[2]
             ,gen_pdf = c(FALSE,TRUE)[2]
             ,top_llama_only = c(FALSE,TRUE)[1]
             ,improve = c("-rag","-prompt","-multi","-alexandria_p")              #Improvements in time order.
             ,show_improvement = c("Regular","All","Better","Worse")[2]
             ,last_improvement = c(FALSE,TRUE)[2]
-            ,image_show = c("base","best","improve_best","improve_all")[1:4]
+            ,image_show = c("base","best","improve_best","improve_all")[1:3]
             )
 
 # Function to get summary of benchmark using bootstrap.
@@ -93,6 +93,7 @@ for(f in fnm) {
 rm(fnm,f)
 tmp$model <- gsub("-enhanced-prompt","-prompt", tmp$model)
 tmp$model <- gsub("-prompt-completeness-3","-prompt2", tmp$model)
+tmp$model <- gsub("-prompt-context-awareness","-prompt3", tmp$model)
 tmp <- merge(tmp, tmp[, .(run_id = max(run_id)), by=model])
 tmp$rubric_criterion_index <- NULL
 tmp$v <- as.numeric(as.factor(tmp$v))-1
