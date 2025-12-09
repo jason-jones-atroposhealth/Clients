@@ -1,16 +1,18 @@
 # Workbench Sources:
 # Using first regimen start: https://workbench.atroposhealth.biz/case/618529f9-621a-4c26-9457-e4d6603d4e98/
 # Using last regimen start: https://workbench.atroposhealth.biz/case/48927b9e-8f21-4efb-a0e0-8d19284b75d9/
-# Using last regimen within 5 years of start: https://workbench.atroposhealth.biz/case/32b0d753-d5cd-4c06-a852-eb15c74525ee/
-# Using last regimen within 3 years of start: https://workbench.atroposhealth.biz/case/0422788f-2f5b-428b-bbde-1ca612adfe86/
-# Using last regimen within 2 years of start: https://workbench.atroposhealth.biz/case/0a32fa1d-4a44-45c8-9501-ded4c5cc3e17/
+# Arcadia, using last regimen within 5 years of initial Dx: https://workbench.atroposhealth.biz/case/32b0d753-d5cd-4c06-a852-eb15c74525ee/
+# Arcadia, using last regimen within 3 years of initial Dx: https://workbench.atroposhealth.biz/case/0422788f-2f5b-428b-bbde-1ca612adfe86/
+# Arcadia, using last regimen within 2 years of initial Dx: https://workbench.atroposhealth.biz/case/0a32fa1d-4a44-45c8-9501-ded4c5cc3e17/
+# Arcadia, using last regimen within 1 years of initial Dx: https://workbench.atroposhealth.biz/case/3c424764-20cb-4519-90ba-86fffdcbc2f4/ 
+# Forian, using last regimen within 5 years of initial Dx: https://workbench.atroposhealth.biz/case/878bf89a-f5bc-40f7-8f35-b0d9c4db0d44/ 
 
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
             ,years              = 2015:2025
-            ,strat              = c("intervention","src")[1]
-            ,src                = c("all","Sz A Last2y")[2]
+            ,strat              = c("intervention","src")[2]
+            ,src                = c("all","Sz A Last2y")[1]
             ,lmt_fu             = c(NA,"12mo")[2]
             ,tgt_prim           = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             ,sdn                = 1221                                           #Random number seed for reproducibility.
@@ -22,6 +24,8 @@ meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
                                    ,outcome_er.visit.psych.diagnosis.12mo=1
                                    )
             ,focus_intervention = c(Ari2MRTU=2)                                  #Focused cohort(s) in rank order for reporting and train/test split matching (NA will mean no primary)
+            ,xcld_treat_pred    = c("followup","baseline_regimens.prior_cnt")[1:1] #Excluded from treatment prediction (pattern matching via grep).
+            ,xcld_outcome_pred  = c("followup")                                  #Excluded from outcome prediction (pattern matching via grep)
             )
 
 fls <- list.files(meta$ddr,".*csv")
@@ -36,6 +40,23 @@ for(f in fls) {
    rm(tmp,m)
 }
 rm(f,fls)
+
+.fncClip <- function(data, row.names=TRUE, row.names.to.column=FALSE) {
+   tmp <- data
+   if(row.names.to.column) {
+      tmp <- as.data.frame(tmp)
+      tmp$rnm <- rownames(tmp)
+      tmp <- tmp[,unique(c("rnm",names(tmp)))]
+      names(tmp)[1] <- " "
+      row.names <- FALSE
+   }
+   clip <- pipe("pbcopy", "w")                       
+   write.table(tmp, file=clip, quote=FALSE, sep="\t", na="", row.names=row.names)                               
+   close(clip)
+   rm(clip)
+}
+
+.fncClip(meta$tb1, row.names.to.column=TRUE)
 
 # Remove unhelpful columns.
 dfA$V1 <- NULL
@@ -212,12 +233,14 @@ rm(fct)
 tb1 <- print(tb1, missing=TRUE, smd=TRUE)
 meta$tb1 <- tb1
 rm(tb1)
-clip <- pipe("pbcopy", "w")                       
-write.table(meta$tb1, file=clip, quote=FALSE, sep="\t", na="")                               
-close(clip)
-rm(clip)
+
+.fncClip(meta$tb1)
 
 #3 * "a"
+
+###############################################################################
+# Get data engineering and master data from TQL.                              #
+###############################################################################
 
 tmp <- readLines(paste0(meta$ddr,"query.tql"))
 X <- tmp[intersect(grep("^var",tmp),grep("rx\\(|rx\\=",gsub(" ","",tolower(tmp))))]
@@ -229,7 +252,7 @@ for(x in X) {
    rxcui[[trimws(unlist(strsplit(x,"="))[1])]] <- as.character(na.omit(unique(sapply(regmatches(unlist(strsplit(x,",")), regexec("'\\s*(.*?)\\s*'", unlist(strsplit(x,",")))), function(y) y[2]))))
 }
 rm(x,X,tmp)
-rxcui
+#rxcui
 
 dfD <- NULL
 for(n in names(rxcui)) {
@@ -242,16 +265,19 @@ rm(n)
 data.table::data.table(dfD)
 
 meta$map_drug <- dfD
-rm(dfD)
+rm(dfD,rxcui)
 
-clip <- pipe("pbcopy", "w")                       
-write.table(meta$map_drug, file=clip, quote=FALSE, sep="\t", na="", row.names=FALSE)                               
-close(clip)
-rm(clip)
+.fncClip(meta$map_drug, row.names=FALSE)
 
-# Build xgboost model for treatment.
-y <- as.integer(as.factor(dfA[[vls$trt]]))-1
-X <- data.matrix(dfA[,vls$pot[-grep("followup|baseline_regimens.prior_cnt",vls$pot)]])
+###############################################################################
+# Build xgboost model for treatment and outcome.                              #
+###############################################################################
+
+mdl <- list()
+
+# Treatment selection prediction model.
+y <- as.integer(as.factor(dfA[[vls$trt]]))-1                                     #Gather outcome (treatment), potential predictors.
+X <- data.matrix(dfA[,vls$pot[-grep(paste(meta$xcld_treat_pred, collapse="|"),vls$pot)]])
 trn <- which(dfA$set=="Train")
 prm <- list(objective="multi:softprob"
            ,eta=0.1
@@ -263,27 +289,49 @@ tin <- Sys.time()
 xcv <- list()
 xcv$best_iteration <- 100
 xcv <- xgboost::xgb.cv(data=X[trn,], label=y[trn]
-                      ,params=prm
-                      ,nfold=5
+                      ,params=prm, nfold=5, nrounds=100, early_stopping_rounds=50
                       ,verbose=FALSE
-                      ,nrounds=200, early_stopping_rounds=50)
+                      )
 xcv$best_iteration
 Sys.time() - tin
 
 set.seed(meta$sdn)
 tin <- Sys.time()
-mdl <- xgboost::xgboost(data=X[trn,], label=y[trn]
-                        ,params=prm
+xgb <- xgboost::xgboost(data=X[trn,], label=y[trn]
+                        ,params=prm, nrounds=xcv$best_iteration, min_child_weight=2
                         ,verbose=FALSE
-                        ,min_child_weight=2
-                        ,nrounds=xcv$best_iteration)
-vmp <- xgboost::xgb.importance(mdl$feature_names, mdl)
+                        )
+vmp <- xgboost::xgb.importance(xgb$feature_names, xgb)
 xgboost::xgb.plot.importance(vmp[,1:2], rel_to_first=TRUE, xlab="Relative importance")
 vmp
 Sys.time() - tin
 
-mtx <- t(matrix(predict(mdl, newdata=X[-trn,mdl$feature_names]), nrow=length(unique(y))))
-colnames(mtx) <- levels(as.factor(dfA$intervention))
+mdl$sz_treat <- list(xcv=xcv, xgb=xgb, vmp=vmp)
+
+prd <- t(matrix(predict(xgb, newdata=X[,xgb$feature_names]), nrow=length(unique(y))))
+colnames(prd) <- paste0(levels(as.factor(dfA$intervention)),"_pred_xgb")
+
+tmp <- as.data.frame(model.matrix(~.-1, data=dfA[,"intervention",drop=FALSE]))
+names(tmp) <- paste0(gsub("intervention","",names(tmp)),"_true")
+tmp <- cbind(tmp,prd)
+head(tmp)
+
+mAUROC_trn <- suppressWarnings(multiROC::multi_roc(data=tmp[trn,]))
+mAUPRC_trn <- suppressWarnings(multiROC::multi_pr(data=tmp[trn,]))
+mAUROC_vld <- suppressWarnings(multiROC::multi_roc(data=tmp[-trn,]))
+mAUPRC_vld <- suppressWarnings(multiROC::multi_pr(data=tmp[-trn,]))
+rst <- as.data.frame(t(rbind(unlist(mAUROC_trn$AUC$xgb)
+                            ,unlist(mAUROC_vld$AUC$xgb)
+                            ,unlist(mAUPRC_trn$AUC$xgb)
+                            ,unlist(mAUPRC_vld$AUC$xgb)
+                            )))
+names(rst) <- c("AUROC_Train","AUROC_Valid","AUPRC_Train","AUPRC_Valid")
+rst$Target <- rownames(rst); rownames(rst) <- NULL
+rst <- rst[,unique(c("Target",names(rst)))]
+rst
+.fncClip(rst, row.names=FALSE)
+
+head(multiROC::test_data)
 
 mtx <- with(dfA, table(intervention, baseline_regimens.prior_cnt))
 mtx / rowSums(mtx)
@@ -302,12 +350,10 @@ rm(fct)
 tb1 <- print(tb1, missing=TRUE, smd=TRUE)
 meta$tb2 <- tb1
 rm(tb1)
-clip <- pipe("pbcopy", "w")                       
-write.table(meta$tb2, file=clip, quote=FALSE, sep="\t", na="")                               
-close(clip)
-rm(clip)
 
-# Build xgboost model for treatment.
+.fncClip(meta$tb2)
+
+# Build xgboost model for outcome
 y <- dfA[dfA$set=="Train",names(meta$focus_target)[1]]
 X <- data.matrix(dfA[dfA$set=="Train",vls$pot[-grep("followup",vls$pot)]])
 prm <- list(objective="binary:logistic"
@@ -328,12 +374,12 @@ Sys.time() - tin
 
 set.seed(meta$sdn)
 tin <- Sys.time()
-mdl <- xgboost::xgboost(data=X, label=y
+xgb <- xgboost::xgboost(data=X, label=y
                         ,params=prm
                         ,verbose=FALSE
                         ,min_child_weight=2
                         ,nrounds=xcv$best_iteration)
-vmp <- xgboost::xgb.importance(mdl$feature_names, mdl)
+vmp <- xgboost::xgb.importance(xgb$feature_names, xgb)
 xgboost::xgb.plot.importance(vmp[,1:2], rel_to_first=TRUE, xlab="Relative importance")
 vmp
 Sys.time() - tin
