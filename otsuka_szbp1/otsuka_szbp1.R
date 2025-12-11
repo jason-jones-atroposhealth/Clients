@@ -11,8 +11,8 @@ rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
             ,years              = 2015:2025
-            ,strat              = c("intervention","src")[2]
-            ,src                = c("all","Sz A Last2y")[1]
+            ,strat              = c("intervention","src")[1]
+            ,src                = c("all","Sz A Last2y")[2]
             ,lmt_fu             = c(NA,"12mo")[2]
             ,tgt_prim           = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             ,sdn                = 1221                                           #Random number seed for reproducibility.
@@ -55,8 +55,6 @@ rm(f,fls)
    close(clip)
    rm(clip)
 }
-
-.fncClip(meta$tb1, row.names.to.column=TRUE)
 
 # Remove unhelpful columns.
 dfA$V1 <- NULL
