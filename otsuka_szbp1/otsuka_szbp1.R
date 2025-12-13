@@ -6,13 +6,16 @@
 # Arcadia, using last regimen within 2 years of initial Dx: https://workbench.atroposhealth.biz/case/0a32fa1d-4a44-45c8-9501-ded4c5cc3e17/
 # Arcadia, using last regimen within 1 years of initial Dx: https://workbench.atroposhealth.biz/case/3c424764-20cb-4519-90ba-86fffdcbc2f4/ 
 # Forian, using last regimen within 5 years of initial Dx: https://workbench.atroposhealth.biz/case/878bf89a-f5bc-40f7-8f35-b0d9c4db0d44/ 
+# Forian, using last regimen within 3 years of initial Dx: https://workbench.atroposhealth.biz/case/49f845e5-03c4-4a2a-8f9f-58daf98997fd/ 
+# Forian, using last regimen within 2 years of initial Dx: https://workbench.atroposhealth.biz/case/c4dfe421-6119-4ad2-bc09-d324183bc77b/ 
+# Forian, using last regimen within 1 years of initial Dx: https://workbench.atroposhealth.biz/case/658f399e-fd60-43cb-9500-b7c69cd586a2/ 
 
 rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 
 meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
             ,years              = 2015:2025
             ,strat              = c("intervention","src")[1]
-            ,src                = c("all","Sz A Last2y")[2]
+            ,src                = c("all","Sz A Last3y")[2]
             ,lmt_fu             = c(NA,"12mo")[2]
             ,tgt_prim           = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             ,sdn                = 1221                                           #Random number seed for reproducibility.
@@ -24,7 +27,7 @@ meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
                                    ,outcome_er.visit.psych.diagnosis.12mo=1
                                    )
             ,focus_intervention = c(Ari2MRTU=2)                                  #Focused cohort(s) in rank order for reporting and train/test split matching (NA will mean no primary)
-            ,xcld_treat_pred    = c("followup","baseline_regimens.prior_cnt")[1:1] #Excluded from treatment prediction (pattern matching via grep).
+            ,xcld_treat_pred    = c("followup","age_group","baseline_regimens.prior_cnt")[1:2] #Excluded from treatment prediction (pattern matching via grep).
             ,xcld_outcome_pred  = c("followup")                                  #Excluded from outcome prediction (pattern matching via grep)
             )
 
@@ -41,6 +44,7 @@ for(f in fls) {
 }
 rm(f,fls)
 
+# Utility function for pasting to clipboard.
 .fncClip <- function(data, row.names=TRUE, row.names.to.column=FALSE) {
    tmp <- data
    if(row.names.to.column) {
@@ -56,24 +60,33 @@ rm(f,fls)
    rm(clip)
 }
 
+# Function for moving items in vector to after a named one.
+.fncMov <- function(x, itm, aft=NA) {
+   sdx <- which(x %in% itm)
+   dst <- which(x==aft)
+   x[c(setdiff(1:dst,sdx)
+       ,sdx
+       ,setdiff((dst+1):length(x),sdx))]
+}
+
 # Remove unhelpful columns.
 dfA$V1 <- NULL
 
 # Fix names.
 names(dfA) <- tolower(names(dfA))
-names(dfA) <- gsub("_disc","_cnt",names(dfA))
 names(dfA) <- gsub("comorb_","cci_",names(dfA))
 names(dfA) <- gsub("baseline_baseline","baseline",names(dfA))
-names(dfA) <- gsub("followup\\.|\\.disorder|_cont|_bin","",names(dfA))
+names(dfA) <- gsub("\\.prior|followup\\.|\\.followup|\\.disorder|_bin|_cont|_disc","",names(dfA))
 names(dfA) <- gsub("blood\\.pressure","bp",names(dfA))
 names(dfA) <- gsub("baseline_comorb","baseline",names(dfA))
 names(dfA) <- gsub("inpatient","ip",names(dfA))
 names(dfA) <- gsub("baseline_prior|baseline_scores","baseline",names(dfA))
-names(dfA) <- gsub("number\\.of\\.regimens\\.previously","regimens\\.prior",names(dfA))
-names(dfA) <- gsub("\\.followup","",names(dfA))
+names(dfA) <- gsub("number\\.of","prior",names(dfA))
+names(dfA) <- gsub("\\.previously","",names(dfA))
+names(dfA) <- gsub("grps","med.groups",names(dfA))
+
 names(dfA) <- gsub("\\.3m","\\.03m",names(dfA))
 names(dfA) <- gsub("\\.6m","\\.06m",names(dfA))
-
 names(dfA)[grep("_3mo" ,names(dfA))] <- paste0(gsub("_3mo" ,"",names(dfA)[grep("_3mo" ,names(dfA))]),".03mo")
 names(dfA)[grep("_6mo" ,names(dfA))] <- paste0(gsub("_6mo" ,"",names(dfA)[grep("_6mo" ,names(dfA))]),".06mo")
 names(dfA)[grep("_12mo",names(dfA))] <- paste0(gsub("_12mo","",names(dfA)[grep("_12mo",names(dfA))]),".12mo")
@@ -82,9 +95,10 @@ names(dfA) <- gsub("outcome\\.","outcome_",names(dfA))
 
 # Clean up intervention.
 x <- ox <- unique(dfA$intervention)
-x <- gsub("INTERVENTION_","",x)
+x <- gsub("INTERVENTION_||\\.ANTIPSYCHOTIC","",x)
 x <- gsub("REF_","\\.",x)
 x <- gsub("ARIPIPRAZOLE|ABILIFY","ARI",x)
+x <- gsub("PALIPERIDONE\\.","PP",x)
 x <- gsub("LONG.ACTING","LAI",x)
 x <- gsub("ARI.ASIMTUFII","Ari2MRTU",x)
 x <- gsub("ARI.MAINTENA","AOM",x)
@@ -94,7 +108,9 @@ x <- gsub("ARI.ORAL","Oral.Ari",x)
 x <- gsub("CLOZAPINE","Clozapine",x)
 x <- gsub("ATYPICAL.NON.ARI","Oral.Atyp.Other",x)
 x <- gsub("TYPICAL","Typical",x)
+x <- gsub("ATypical","Atypical",x)
 names(x) <- ox
+#data.frame(x)
 dfA$intervention <- x[dfA$intervention]
 rm(x,ox)
 
@@ -112,9 +128,9 @@ if(!is.character(dfA$zip)) dfA$zip <- sprintf(paste0("%0",max(nchar(dfA$zip), na
 dfA$index_date <- with(dfA, dob + index_date)
 
 # Convert days to years.
-for(n in names(dfA)[grep("days_",names(dfA))]) {
+for(n in names(dfA)[grep("days_|_time",names(dfA))]) {
    dfA[[n]] <- dfA[[n]] / 365.25
-   names(dfA)[which(names(dfA)==n)] <- gsub("days_","years_",n)
+   names(dfA)[which(names(dfA)==n)] <- gsub("days|time","years",n)
 }
 rm(n)
 
@@ -167,15 +183,6 @@ dfA$set <- "Test"
 dfA$set[sample(nrow(dfA), size=nrow(dfA)*meta$train_pct)] <- "Train"
 rm(ful,tmp,rnd_mad)
 
-# Function for moving items in vector to after a named one.
-.fncMov <- function(x, itm, aft=NA) {
-   sdx <- which(x %in% itm)
-   dst <- which(x==aft)
-   x[c(setdiff(1:dst,sdx)
-       ,sdx
-       ,setdiff((dst+1):length(x),sdx))]
-}
-
 vls <- list(id   =c("src","patient_id","index_date","set")
             ,tgt = names(dfA)[grep("outcome",names(dfA))]
             ,trt = "intervention"
@@ -209,6 +216,7 @@ if(tolower(meta$strat)=="src") {
    vls$t1 <- c(vls$tgt,"src",vls$pot)
 }
 
+vls$t1 <- .fncMov(vls$t1, itm="baseline_years.since.initial.dx", aft=tail(vls$t1[grep("outcome",vls$t1)],1))
 vls$t1 <- .fncMov(vls$t1, itm="years_followup_gt1", aft=tail(vls$t1[grep("outcome",vls$t1)],1))
 
 data.table::data.table(dfA[,vls$t1])
@@ -232,15 +240,15 @@ tb1 <- print(tb1, missing=TRUE, smd=TRUE)
 meta$tb1 <- tb1
 rm(tb1)
 
-.fncClip(meta$tb1)
+.fncClip(meta$tb1, row.names.to.column=TRUE)
 
-#3 * "a"
+3 * "a"
 
 ###############################################################################
 # Get data engineering and master data from TQL.                              #
 ###############################################################################
 
-tmp <- readLines(paste0(meta$ddr,"query.tql"))
+tmp <- readLines(paste0(meta$ddr,"tql.txt"))
 X <- tmp[intersect(grep("^var",tmp),grep("rx\\(|rx\\=",gsub(" ","",tolower(tmp))))]
 X <- gsub("var ","",X)
 X <- gsub('"',"'",X)
@@ -331,7 +339,7 @@ rst
 
 head(multiROC::test_data)
 
-mtx <- with(dfA, table(intervention, baseline_regimens.prior_cnt))
+mtx <- with(dfA, table(intervention, baseline_number.of.grps.previously))
 mtx / rowSums(mtx)
 rm(mtx)
 
@@ -382,3 +390,27 @@ xgboost::xgb.plot.importance(vmp[,1:2], rel_to_first=TRUE, xlab="Relative import
 vmp
 Sys.time() - tin
 
+3 * "a"
+
+#
+# Policy learning.
+#
+
+# Specify inputs to process.
+Y <- abs(dfA[[vls$tgt[1]]]-1)
+W <- as.factor(dfA[[vls$trt]])
+X <- dfA[,vls$pot[-grep(paste(meta$xcld_treat_pred, collapse="|"),vls$pot)]]
+X <- X[,sapply(X, function(x) mean(!is.na(x))) == 1]
+X <- model.matrix(~.-1, data=X)
+trn <- which(dfA$set=="Train")
+
+# A simple difference in means estimate ignoring non-random assignment.
+summary(lm(Y ~ W))
+
+# A doubly robust ATE estimate (forest-based AIPW).
+cf = grf::multi_arm_causal_forest(X,Y,W)
+grf::average_treatment_effect(cf)
+
+# A histogram of the estimated propensity scores.
+# Overlap requires that these don't get too close to either 0 or 1.
+hist(cf.full$W.hat, xlab = "Estimated propensity scores", main = "")
