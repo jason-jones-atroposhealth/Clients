@@ -15,19 +15,21 @@ rm(list=ls()); graphics.off(); gc(); options(scipen=99, digits=3)
 meta <- list(ddr                = "~/Downloads/OtsukaSzBP1/"
             ,years              = 2015:2025
             ,strat              = c("intervention","src")[1]
-            ,src                = c("all","Sz A Last3y")[2]
+            ,src                = c("all","Sz F Last3y")[2]
             ,lmt_fu             = c(NA,"12mo")[2]
+            ,req_fu             = c("all","years_followup_ge1")[2]
             ,tgt_prim           = c(NA,"ip.visit","er.visit","suicide","regimen","side")[-1]
             ,sdn                = 1221                                           #Random number seed for reproducibility.
             ,train_pct          = 0.70                                           #Percent of available sample to use for training.
             ,focus_target       = c(outcome_ip.visit.or.regimen.change.12mo=2    #Focus targets in rank order for reporting and train/test split matching (NA will mean all targets)
+                                   ,years_followup_ge1=2
                                    ,outcome_ip.visit.any.12mo=1
                                    ,outcome_regimen.change.12mo=1
                                    ,outcome_ip.visit.psych.diagnosis.12mo=1
                                    ,outcome_er.visit.psych.diagnosis.12mo=1
                                    )
             ,focus_intervention = c(Ari2MRTU=2)                                  #Focused cohort(s) in rank order for reporting and train/test split matching (NA will mean no primary)
-            ,xcld_treat_pred    = c("followup","age_group","baseline_regimens.prior_cnt")[1:2] #Excluded from treatment prediction (pattern matching via grep).
+            ,xcld_treat_pred    = c("followup","age_group","prior.med")[1:3]     #Excluded from treatment prediction (pattern matching via grep).
             ,xcld_outcome_pred  = c("followup")                                  #Excluded from outcome prediction (pattern matching via grep)
             )
 
@@ -45,13 +47,13 @@ for(f in fls) {
 rm(f,fls)
 
 # Utility function for pasting to clipboard.
-.fncClip <- function(data, row.names=TRUE, row.names.to.column=FALSE) {
+.fncClip <- function(data, row.names=TRUE, row.names.to.column=FALSE, first.column.name=" ") {
    tmp <- data
    if(row.names.to.column) {
       tmp <- as.data.frame(tmp)
       tmp$rnm <- rownames(tmp)
       tmp <- tmp[,unique(c("rnm",names(tmp)))]
-      names(tmp)[1] <- " "
+      names(tmp)[1] <- first.column.name
       row.names <- FALSE
    }
    clip <- pipe("pbcopy", "w")                       
@@ -81,9 +83,9 @@ names(dfA) <- gsub("blood\\.pressure","bp",names(dfA))
 names(dfA) <- gsub("baseline_comorb","baseline",names(dfA))
 names(dfA) <- gsub("inpatient","ip",names(dfA))
 names(dfA) <- gsub("baseline_prior|baseline_scores","baseline",names(dfA))
-names(dfA) <- gsub("number\\.of","prior",names(dfA))
+names(dfA) <- gsub("number\\.of","prior.med",names(dfA))
 names(dfA) <- gsub("\\.previously","",names(dfA))
-names(dfA) <- gsub("grps","med.groups",names(dfA))
+names(dfA) <- gsub("grps","groups",names(dfA))
 
 names(dfA) <- gsub("\\.3m","\\.03m",names(dfA))
 names(dfA) <- gsub("\\.6m","\\.06m",names(dfA))
@@ -135,7 +137,7 @@ for(n in names(dfA)[grep("days_|_time",names(dfA))]) {
 rm(n)
 
 # Add follow-up < 1 yr.
-dfA$years_followup_gt1 <- with(dfA, ifelse(years_followup >= 1,1,0))
+dfA$years_followup_ge1 <- with(dfA, ifelse(years_followup >= 1,1,0))
 
 # Add composite outcome any inpatient admission or regimen change (replicate Wu)
 for(n in c("03mo","06mo","12mo")) {
@@ -217,14 +219,18 @@ if(tolower(meta$strat)=="src") {
 }
 
 vls$t1 <- .fncMov(vls$t1, itm="baseline_years.since.initial.dx", aft=tail(vls$t1[grep("outcome",vls$t1)],1))
-vls$t1 <- .fncMov(vls$t1, itm="years_followup_gt1", aft=tail(vls$t1[grep("outcome",vls$t1)],1))
+vls$t1 <- .fncMov(vls$t1, itm="years_followup_ge1", aft=tail(vls$t1[grep("outcome",vls$t1)],1))
 
 data.table::data.table(dfA[,vls$t1])
 
 bak <- dfA
 
-if(!any(tolower(meta$src)=="all")) {
+if(!any(tolower(meta$src)=="all")) {                                             #Require specific source file.
    dfA <- subset(dfA, tolower(src) %in% tolower(meta$src))
+}
+
+if(!any(tolower(meta$req_fu)=="all")) {                                          #Require specific length of followup.
+   dfA <- dfA[dfA[[meta$req_fu]]==1,]
 }
 
 dfA$index_year <- paste0("y",dfA$index_year)
@@ -240,7 +246,7 @@ tb1 <- print(tb1, missing=TRUE, smd=TRUE)
 meta$tb1 <- tb1
 rm(tb1)
 
-.fncClip(meta$tb1, row.names.to.column=TRUE)
+.fncClip(meta$tb1, row.names.to.column=TRUE, first.column.name=paste0("Source=",meta$src," ",ifelse(!is.na(meta$req_fu),meta$req_fu,"")))
 
 3 * "a"
 
